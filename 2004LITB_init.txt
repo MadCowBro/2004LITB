@@ -1,0 +1,623 @@
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2016,
+            "display_year": "2004 - Life In The Balance",
+            "summary": "Put election description here. You can use html tags here too.",
+            "image_url": "https://www.jetsimon.com/public/exampleelection.png",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://images2.imgbox.com/ef/8b/nySseolu_o.png",
+            "recommended_reading": "<ul>\n<li><a href=https://www.chicagotribune.com/opinion/editorials/ct-edit-chicago-tribune-biden-endorsement-20200925-lnyxsb5qvrftnjjmj3rnzj33jy-story.html>Our Case For Joe Biden</a></li>\n<li><a href=https://nationalinterest.org/feature/case-trump-166808>The Case For Trump</a></li>\n<li><a href=https://www.npr.org/2020/11/18/935730100/how-biden-won-ramping-up-the-base-and-expanding-margins-in-the-suburbs>How Biden Won: Ramping Up The Base And Expanding Margins In The Suburbs</a></li>\n<li><a href=https://www.prospectmagazine.co.uk/politics/donald-trump-joe-biden-us-election-almost-win-votes-concede>Why Did Trump Almost Win?</a></li>\n<li><a href=https://www.hoover.org/research/no-evidence-voter-fraud-guide-statistical-claims-about-2020-election>No Evidence For Voter Fraud: A Guide To Statistical Claims About The 2020 Election</a></li>\n</ul>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2016,
+        "is_premium": 0,
+        "display_year": "2004 - Life In The Balance"
+    }
+]
+
+campaignTrail_temp.credits = "Our Team"
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1001,
+        "fields": {
+            "first_name": "Al",
+            "last_name": "Gore",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Good",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#2626cfff",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://images2.imgbox.com/2b/19/MoJ5bias_o.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1002,
+        "fields": {
+            "first_name": "Joe",
+            "last_name": "Lieberman",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Energetic",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#cb2a2aff",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://images2.imgbox.com/49/ca/npguoT3S_o.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>This is a running mate description it only shows for running mates</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 109261,
+        "fields": {
+            "candidate": 1001,
+            "running_mate": 1002
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            1001
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            1001
+        ]
+    }
+]
+
+jet_data = {
+    "headerColor": "#d52080",
+    "windowColor": "#30e12d",
+    "containerColor": "#000000",
+    "innerWindowColor": "#2448db",
+    "bannerImageUrl": "https://images2.imgbox.com/63/3b/r8qqqShR_o.png",
+    "backgroundImageUrl": "https://images2.imgbox.com/ea/e7/PkG59Zmr_o.png",
+    "endingTextColor": "#000000",
+    "customQuote": "",
+    "gameTitle": "LIFE IN THE BALANCE"
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>LIFE IN THE BALANCE</h2>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#d52080";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#30e12d";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#000000";
+
+document.getElementById("header").src = "https://images2.imgbox.com/63/3b/r8qqqShR_o.png";
+
+document.body.background = "https://images2.imgbox.com/ea/e7/PkG59Zmr_o.png";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#0f0f0fff!important; color: white;}</style>";
+
+const _gameWindow = document.getElementById("game_window"); 
+if (_gameWindow) {
+    _gameWindow.style.border = "5px solid #ffffffff"; 
+}
+
+corrr=`<img src='https://images2.imgbox.com/bb/f5/KHJqG08w_o.png' width='100%'/><span id="after_button"></span>`;
+if (gameWindow) {
+    // Set the dark border for the game window
+    gameWindow.style.border = "8px double #39de54ff";
+}
+
+$("#game_window")[0].style.backgroundImage = "url(https://images2.imgbox.com/42/13/ujTe4POz_o.png)"
+
+e = campaignTrail_temp
+
+e.HomeStateText = "Status:";
+
+function appendStyle() {
+
+    if (!document.querySelector('meta[name="viewport"]')) {
+        const metaTag = document.createElement('meta');
+        metaTag.name = "viewport";
+        metaTag.content = "width=device-width, initial-scale=1";
+        document.head.appendChild(metaTag);
+    }
+
+if (!document.querySelector('#radio-option-style')) {
+        const style = document.createElement('style');
+        style.id = 'radio-option-style';
+        style.textContent = `
+			#election_description_window {
+				background-color: rgba(72, 72, 72, 1);
+				color: white;
+				height: 220px;
+				border-color: #123ce8ff;
+				border-width: 2px;
+				border-style: solid;
+				border-image: initial;
+        font-size: 17px;
+        font-family: Arial;
+			}
+			#election_image {
+              width: 300px;
+              height: 160px;
+			  background-image: url('https://images2.imgbox.com/02/ee/t6kwrDON_o.png');
+              border: 4px double rgba(224, 224, 224, 1);
+			}
+			#election_image img {
+			  padding: 1px;
+			  z-index: 0;
+			  opacity: 0;
+			}
+			#inner_window_1 {
+			  margin: 1em;
+			}
+
+#visit_window {
+  height: auto;
+}
+
+.inner_window_question h3 {
+	margin: 0 1em .5em;
+	border: solid;
+	border-color: #c9c9c9;
+	background-color: #f1efff;
+}
+
+.inner_window_w_desc {
+	background-color: #ffd3d3;
+	/* margin: 1em 1em 0;
+	padding-top: .5em; */
+	border: 5px solid #39de54ff;
+	text-align: center;
+	height: 72%;
+	position: relative;
+	clear: both
+}
+
+.inner_window_question {
+	background-color: #F8F8F8;
+	/*margin: 1em 1em .7em;
+	padding-top: .3em;*/
+	border-style: double;
+	border-color: #C9C9C9;
+	text-align: center;
+	height: 45%;
+	position: relative;
+	clear: both
+}
+
+#game_window {
+	background-color: #BFE6FF;
+	margin: .5em;
+	border-style: solid;
+	border-color: #C9C9C9;
+	border-width: 3px;
+	height: 53em;
+	text-align: center;
+	position: relative
+}
+
+.overlay_window {
+  animation: fadeInScale 0.3s cubic-bezier(0.3, 1.2, 0.2, 1) forwards,
+             rainbowShift 18s linear infinite,
+             hologlow 1.5s ease-in-out infinite alternate;
+  opacity: 0;
+  background: linear-gradient(135deg, #000000, #111111, #1a1a1a, #000000);
+  background-size: 400% 400%;
+  border-radius: 0.7rem;
+  box-shadow:
+    0 0 1.4em rgba(255, 255, 255, 0.25),
+    0 0 3em rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-flow: column;
+  color: #ffffff;
+  padding: 1.5em;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.overlay_window h3 {
+  margin: 0;
+  padding: 0.6em 1em;
+  font-size: 1.4em;
+  background: #000000;
+  border-radius: 0.7rem 0.7rem 0 0;
+  color: #ffffff;
+  text-shadow:
+    0 0 6px #ffffff,
+    0 0 10px rgba(255, 255, 255, 0.75);
+}
+
+.overlay_window p {
+  margin: 0.7em 0 0 0;
+  line-height: 1.5em;
+  color: #eaeaea;
+}
+
+@keyframes rainbowShift {
+  0% {
+    filter: hue-rotate(0deg);
+    background-position: 0% 50%;
+  }
+  50% {
+    filter: hue-rotate(180deg);
+    background-position: 100% 50%;
+  }
+  100% {
+    filter: hue-rotate(360deg);
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes hologlow {
+  0% { box-shadow: 0 0 1em rgba(255, 255, 255, 0.2); }
+  100% { box-shadow: 0 0 2.2em rgba(255, 255, 255, 0.6); }
+}
+
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.visit_text {
+  background: #222222;
+  color: #ffffff;
+  border-radius: .4em;
+  width: fit-content;
+  margin-inline: auto;
+  padding: .5rem 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.overlay_window img {
+	margin-top: .7em;
+	border: solid;
+	border-color: #787878;
+}
+
+.description_window_small {
+	background-color: #202020;
+	height: 47%;
+	margin: 2em 1em;
+	padding: .2em;
+	border-style: double;
+	border-color: #C9C9C9
+}
+
+.campaign_trail_start_emphasis {
+  background: none;
+}
+
+.election_collage {
+	background: none;
+	margin: 1em 2em;
+	padding: 0;
+	border-style: solid;
+	border-color: #fff2f2ff
+}
+
+.person_summary ul {
+                display: flex;
+                flex-flow: column;
+                padding: 0;
+                margin: 0;
+            }
+
+            .person_summary li {
+                margin: .75em 0 0 0;
+                border: 1px solid rgba(233, 14, 127, 1);
+                font-family: Tahoma;
+            }
+
+.person_summary ul {
+                list-style: none;
+            }
+
+.person_summary li::before {
+                content: "--> ";
+                font-weight: bold;
+            }
+
+.game_header {
+        padding: 0px;
+        border-color: #FFF;
+        background-color: transparent;
+      }
+
+      #candidate_description_window {
+        background-color: #3a3a3aff;
+    border-color: #123ce8ff;
+    border-width: 2px;
+    border-style: double;
+    border-image: initial;
+    color: white;
+      }
+
+      #running_mate_description_window {
+        background-color: #3a3a3aff;
+    border-color: #123ce8ff;
+    border-width: 2px;
+    border-style: double;
+    border-image: initial;
+    color: white;
+      }
+
+#candidate_image, #running_mate_image {
+  border: 7px solid #080808ff;
+}
+
+button:not(.player-control-button), .btn, .is-info, .is-success, .is-primary, .is-secondary {
+  box-sizing: border-box;
+  padding: 4px 12px;
+  font-size: 10px;
+  font-family:"Press Start 2P", monospace;
+  cursor: pointer;
+
+  background: #00b0ff;
+  color: #ffffff;
+
+  border: 3px solid #000000;
+  border-radius: 0;
+
+  box-shadow:
+    0 0 0 3px #ffffff inset,
+    4px 4px 0 #000000;
+
+  transition: transform 0.15s ease;
+}
+
+button:not(.player-control-button):hover,
+.btn:hover,
+.is-info:hover,
+.is-success:hover,
+.is-primary:hover,
+.is-secondary:hover {
+  transform: translate(-3px, -3px);
+  box-shadow:
+    0 0 0 3px #ffffff inset,
+    6px 6px 0 #000000;
+}
+
+        `;
+        document.head.appendChild(style);
+    }
+
+// Psst: this is for replacing the site_description with this custom modal.
+(() => {
+    const CONFIG = {
+        imageSrc: 'https://images2.imgbox.com/e4/60/RVw5TT2i_o.png',
+        margin: '-20px',
+        widthCalc: 'calc(100% - 30px)',
+    };
+
+    (function addPrologueBorder() {
+        const id = 'prologue-border-style';
+        if (document.getElementById(id)) return;
+        const s = document.createElement('style');
+        s.id = id;
+        s.textContent = `
+            #inner_window_1 {
+                box-sizing: border-box;
+                border: 3px solid #e74b89ff;
+                padding: 8px;
+                background: #1e1e1eff;
+            }
+        `;
+        document.head.appendChild(s);
+    })();
+
+    const inner = document.getElementById('inner_window_1');
+    if (!inner || inner.children.length < 3) return;
+    const [headingEl, contentEl] = inner.children;
+    const gameStart = document.getElementById('game_start');
+    const gameWindow = document.getElementById('game_window');
+
+    if (gameWindow) gameWindow.style.height = 'auto';
+
+    headingEl.innerHTML = `<h3 style="font-size: 60px; font-family: Courier New; color: #ffffffff; letter-spacing: 15px"><i>How's It Going.</i></h3>`;
+    Object.assign(contentEl.style, { marginLeft: CONFIG.margin, width: CONFIG.widthCalc });
+    contentEl.innerHTML = generatePrologueHTML(CONFIG);
+
+    Object.assign(contentEl.style, { 
+        marginLeft: CONFIG.margin, 
+        width: CONFIG.widthCalc, 
+        color: 'white'
+    });
+
+    if (gameStart) {
+        gameStart.innerHTML = '<strong>I must act quick.</strong>';
+        const clearHeight = () => { if (gameWindow) gameWindow.style.removeProperty('height'); };
+        if (window.jQuery) $('#game_start').on('click', clearHeight);
+        else gameStart.addEventListener('click', clearHeight);
+    }
+
+    function generatePrologueHTML({ imageSrc }) {
+        return `
+        <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px;">
+            <div class="gradient-fade-right">
+                <img src="${imageSrc}" alt="alt text" />
+            </div>
+        </div>
+        <p>
+            <div style='text-decoration: color: #000000ff; font-family: Arial; font-weight: 500; font-size: 15px;'>
+Placeholder Text lmfao
+            </div>
+        </p>
+        `;
+    }
+
+})();
+
+}
+
+appendStyle();
+
+function addDynamicCSS() {
+    var css = `
+
+    .mytooltip {
+        position: relative;
+        display: inline-block;
+        cursor: help;
+        color: #ff008c;
+        font-weight: 800;
+        text-decoration: underline dotted #ffca1b;
+        font-family: "Press Start 2P", monospace;
+        letter-spacing: 0.5px;
+        text-shadow:
+            0px 0px 1px #ff008c,
+            0px 0px 3px #ff5fb5;
+    }
+
+    .mytooltip .mytooltiptext {
+        width: auto;
+        max-width: 360px;
+        min-width: 120px;
+        white-space: normal;
+
+        background: repeating-linear-gradient(
+            45deg,
+            #ffca1b,
+            #ffca1b 8px,
+            #ffe37d 8px,
+            #ffe37d 16px
+        );
+        color: #000000;
+
+        border: 4px solid #ff008c;
+        outline: 3px solid #000000;
+        border-radius: 4px;
+
+        padding: 16px 20px;
+        position: absolute;
+        z-index: 200;
+        opacity: 0;
+
+        pointer-events: none;
+        font-size: 13px;
+        line-height: 1.55;
+        font-weight: 700;
+        font-family: "Press Start 2P", monospace;
+
+        bottom: 130%;
+        left: 50%;
+        transform-origin: bottom center;
+        transform: translateX(-50%) translateY(10px) scale(0.9);
+
+        transition:
+            opacity 0.18s ease-out,
+            transform 0.18s ease-out;
+    }
+
+    .mytooltip .mytooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -8px;
+        border-width: 8px;
+        border-style: solid;
+        border-color: #ff008c transparent transparent transparent;
+        filter: drop-shadow(0px 0px 2px #000);
+    }
+
+    .mytooltip:hover .mytooltiptext {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .mytooltip .mytooltiptext img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0;
+        margin-top: 12px;
+        border: 4px solid #ff008c;
+        outline: 3px solid #000000;
+    }
+
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+
+    styleElem.appendChild(document.createTextNode(css));
+
+    document.head.appendChild(styleElem);
+}
+
+
+addDynamicCSS();
+
+tooltipList = [
+  {searchString: "Trump", explanationText: "<img src=https://images2.imgbox.com/e7/5b/xGvHSmAD_o.png> Your old opponent, pretty funny guy."},
+  {searchString: "Placeholder 2", explanationText: "<img src=https://i.imgur.com/PUT IMGUR LINK HERE> Put the Text Here"}
+];
+
+//#endcode
