@@ -3,13 +3,13 @@ campaignTrail_temp.election_json = [
         "model": "campaign_trail.election",
         "pk": 20,
         "fields": {
-            "year": 2016,
-            "display_year": "2004 - Life In The Balance",
-            "summary": "Put election description here. You can use html tags here too.",
-            "image_url": "https://www.jetsimon.com/public/exampleelection.png",
+            "year": 2004,
+            "display_year": "Life In The Balance",
+            "summary": "<div style='overflow: auto; height: 200px'>Al Gore squeaked into office after Florida's hotly contested electoral votes were given to him, following a grueling recount. What was meant to be a breezy jog into the next millennium was turned on its head with the September 11th attacks. Gore never wanted to be a wartime president, but the invasion of Afghanistan was not just a political necessity, but the right thing to do.</p>\n\Climate action, education reform, protection and expansion of our welfare programs, all have been more successful than not. Still, many people see Gore as a 'crisis president;'. They have no idea what's coming.</div>",
+            "image_url": "https://images2.imgbox.com/8b/e5/M8TGYFfJ_o.png",
             "winning_electoral_vote_number": 270,
             "advisor_url": "https://images2.imgbox.com/ef/8b/nySseolu_o.png",
-            "recommended_reading": "<ul>\n<li><a href=https://www.chicagotribune.com/opinion/editorials/ct-edit-chicago-tribune-biden-endorsement-20200925-lnyxsb5qvrftnjjmj3rnzj33jy-story.html>Our Case For Joe Biden</a></li>\n<li><a href=https://nationalinterest.org/feature/case-trump-166808>The Case For Trump</a></li>\n<li><a href=https://www.npr.org/2020/11/18/935730100/how-biden-won-ramping-up-the-base-and-expanding-margins-in-the-suburbs>How Biden Won: Ramping Up The Base And Expanding Margins In The Suburbs</a></li>\n<li><a href=https://www.prospectmagazine.co.uk/politics/donald-trump-joe-biden-us-election-almost-win-votes-concede>Why Did Trump Almost Win?</a></li>\n<li><a href=https://www.hoover.org/research/no-evidence-voter-fraud-guide-statistical-claims-about-2020-election>No Evidence For Voter Fraud: A Guide To Statistical Claims About The 2020 Election</a></li>\n</ul>",
+            "recommended_reading":"<ul><li><a href=https://en.wikipedia.org/wiki/Al_Gore style=font-size: 48px; font-weight: 900; text-decoration: none;>Our Supreme Leader</a></li></ul>",
             "has_visits": 1,
             "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
         }
@@ -19,13 +19,27 @@ campaignTrail_temp.election_json = [
 campaignTrail_temp.temp_election_list = [
     {
         "id": 20,
-        "year": 2016,
+        "year": 2004,
         "is_premium": 0,
-        "display_year": "2004 - Life In The Balance"
+        "display_year": "Life In The Balance"
     }
 ]
 
 campaignTrail_temp.credits = "Our Team"
+
+const fontLink = document.createElement('link');
+fontLink.href = 'https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&display=swap';
+fontLink.rel = 'stylesheet';
+document.head.appendChild(fontLink);
+
+const style = document.createElement('style');
+style.textContent = `
+  #election_description_window {
+    font-family: 'Rubik 80s Fade', sans-serif;
+  }
+`;
+document.head.appendChild(style);
+
 
 campaignTrail_temp.global_parameter_json = [
     {
@@ -63,7 +77,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Democratic",
             "state": "Good",
             "priority": 1,
-            "description": "<p>Put description here</p>",
+            "description": "<div style='overflow: auto; height: 200px; margin-top: 0.5em'><p> <b>President Gore is a cautious man. Rather than falling into hysteria and making rash decisions, he waits for the facts and leans on the experts. When terrorists struck at the heart of America on 9/11, he had to lead the charge into Afghanistan, but held firm on militarily pursuing rumors of WMDs in Iraq. Moreover, it reportedly took him over a week of convincing and persuasion by Hillary and the rest of the cabinet to push a healthcare and infrastructure bill through congress. Not to mention the times he fumbled up major democratic-leaning bills that could’ve turned the course of his presidency for good, making him look slow and inefficient towards an already hostile congress.</p>\n\But now, everything has shaken up. A giant threat looming over America, threatening the very existence of our loved heartland has started to form. It is unexplainable, unavoidable and all-consuming. To Gore’s dismay, he’ll need to act quicker than he likes if he wants to contain this new threat and keep up his own reputation. The fate of the nation, and the world, depends on his actions as the ultimate wartime president.</p> </div>",
             "color_hex": "#2626cfff",
             "secondary_color_hex": null,
             "is_active": 1,
@@ -94,12 +108,22 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p>This is a running mate description it only shows for running mates</p>",
+            "description_as_running_mate": "<div style='overflow: auto; height: 200px; margin-top: 0.5em'><p> <b>Vice President Lieberman is the aggressor to his boss’s pacifism. He unsuccessfully pushed for the overthrow of Iraqi dictator Saddam Hussein and to learn the truth behind his reported weapons of mass destruction. Lieberman nowadays seems active as well, campaigning alone throughout America for some unknown reason, slowly growing his charisma and separating himself from Gore. Even speaking in some Republican orchestrated events with notable senators and congressmen about issues like 9/11 and the economy. But he has always been against partisanship, the monster halting any sort of advancement in the current presidency, always advocating for progress above all and whipping congress into shape.</p>\n\But what happens when a different monster strikes within America’s borders?</p>\n\Can he convince President Gore to take decisive action to neutralize the greatest threat of our time? Can he keep the country’s spirit high during an unimaginable crisis? Or will the greatest country in the world tear itself apart at the seams…</p> </div>",
             "candidate_score": 1,
             "running_mate": true
         }
     }
 ]
+
+campaignTrail_temp.credits = "<button onclick='credits()'>The Zomb Squad</button>";
+  credits = function() {
+    credits = ["Lead Dev: MadCowBro", "Coders: HouseyHouse", "Writers: MadCowBro", "Designers: richardbjameson", "Brainstormers: Haj8n, Sammyy, maskedmalarky, Me: the Fellow"]
+    text = ""
+    for (i in credits) {
+        text += credits[i] + "\n"
+    }
+    alert(text)
+  }
 
 campaignTrail_temp.running_mate_json = [
     {
@@ -164,6 +188,18 @@ document.body.background = "https://images2.imgbox.com/ea/e7/PkG59Zmr_o.png";
 
 document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#0f0f0fff!important; color: white;}</style>";
 
+campaignTrail_temp.modBoxTheme = {
+  "header_color": "#000000ff",
+  "header_image_url": "https://images2.imgbox.com/94/6b/br5hZtyj_o.png",
+  "header_text_color": "#ffffffff",
+  "description_text_color": "#ffffffff",
+  "description_background_color": "#e1297fff",
+  "main_color": "#04021aff",
+  "secondary_color": "#22de22ff",
+  "ui_text_color": "#ffffffff"
+}
+
+
 const _gameWindow = document.getElementById("game_window"); 
 if (_gameWindow) {
     _gameWindow.style.border = "5px solid #ffffffff"; 
@@ -173,6 +209,7 @@ corrr=`<img src='https://images2.imgbox.com/bb/f5/KHJqG08w_o.png' width='100%'/>
 if (gameWindow) {
     // Set the dark border for the game window
     gameWindow.style.border = "8px double #39de54ff";
+    gameWindow.style.boxShadow = "0 0 17px rgba(57, 222, 84, 0.8)";
 }
 
 $("#game_window")[0].style.backgroundImage = "url(https://images2.imgbox.com/42/13/ujTe4POz_o.png)"
@@ -205,21 +242,23 @@ if (!document.querySelector('#radio-option-style')) {
         style.id = 'radio-option-style';
         style.textContent = `
 			#election_description_window {
-				background-color: rgba(72, 72, 72, 1);
+				background-color: rgba(42, 42, 42, 1);
 				color: white;
 				height: 220px;
 				border-color: #123ce8ff;
 				border-width: 2px;
 				border-style: solid;
 				border-image: initial;
-        font-size: 17px;
-        font-family: Arial;
+                box-shadow: 0 0 17px rgba(18, 60, 232, 0.65);
+                font-size: 18px;
+                font-family: Rubik 80s Fade;
 			}
 			#election_image {
               width: 300px;
               height: 160px;
 			  background-image: url('https://images2.imgbox.com/02/ee/t6kwrDON_o.png');
               border: 4px double rgba(224, 224, 224, 1);
+              box-shadow: 0 0 5px rgba(255, 255, 255, 0.75);
 			}
 			#election_image img {
 			  padding: 1px;
@@ -237,8 +276,8 @@ if (!document.querySelector('#radio-option-style')) {
 .inner_window_question h3 {
 	margin: 0 1em .5em;
 	border: solid;
-	border-color: #c9c9c9;
-	background-color: #f1efff;
+    border-color: #39de54;
+    background-color: #49258f;
 }
 
 .inner_window_w_desc {
@@ -253,15 +292,13 @@ if (!document.querySelector('#radio-option-style')) {
 }
 
 .inner_window_question {
-	background-color: #F8F8F8;
-	/*margin: 1em 1em .7em;
-	padding-top: .3em;*/
-	border-style: double;
-	border-color: #C9C9C9;
-	text-align: center;
-	height: 45%;
-	position: relative;
-	clear: both
+    background-color: #000000;
+    border-style: solid;
+    border-color: #ffffff;
+    text-align: center;
+    height: 45%;
+    position: relative;
+    clear: both;
 }
 
 #game_window {
@@ -273,6 +310,33 @@ if (!document.querySelector('#radio-option-style')) {
 	height: 53em;
 	text-align: center;
 	position: relative
+}
+
+.inner_inner_window {
+	background: #000000;
+	color: white;
+	margin: 0;
+	height: 85%
+}
+
+#running_mate_pic {
+    height: 28%;
+    border: double;
+    border-color: #2254de;
+    box-shadow:
+    float: right;
+    margin-right: 13em;
+    overflow: hidden;
+    display: block;
+    line-height: 0;
+}
+
+#candidate_pic {
+    height: 28%;
+    border: double;
+    border-color: #2254de;
+    float: left;
+    margin-left: 13em;
 }
 
 .overlay_window {
@@ -361,6 +425,11 @@ if (!document.querySelector('#radio-option-style')) {
 	border-color: #C9C9C9
 }
 
+#main_content_area {
+	margin: 0;
+	height: 72%;
+}
+
 .campaign_trail_start_emphasis {
   background: none;
 }
@@ -421,6 +490,10 @@ if (!document.querySelector('#radio-option-style')) {
 
 #candidate_image, #running_mate_image {
   border: 7px solid #080808ff;
+  box-shadow:
+    0 0 12px rgba(215, 224, 48, 0.8),
+    0 0 25px rgba(210, 144, 20, 0.8),
+    0 0 8px rgba(222, 194, 36, 0.8);
 }
 
 button:not(.player-control-button), .btn, .is-info, .is-success, .is-primary, .is-secondary {
@@ -491,7 +564,7 @@ button:not(.player-control-button):hover,
 
     if (gameWindow) gameWindow.style.height = 'auto';
 
-    headingEl.innerHTML = `<h3 style="font-size: 60px; font-family: Courier New; color: #ffffffff; letter-spacing: 15px"><i>How's It Going.</i></h3>`;
+    headingEl.innerHTML = `<h3 style="font-size: 60px; font-family: Impact; color: #ffffffff; letter-spacing: 15px"><i>Status Update</i></h3>`;
     Object.assign(contentEl.style, { marginLeft: CONFIG.margin, width: CONFIG.widthCalc });
     contentEl.innerHTML = generatePrologueHTML(CONFIG);
 
@@ -502,7 +575,7 @@ button:not(.player-control-button):hover,
     });
 
     if (gameStart) {
-        gameStart.innerHTML = '<strong>I must act quick.</strong>';
+        gameStart.innerHTML = '<strong>Lets Fricking Go</strong>';
         const clearHeight = () => { if (gameWindow) gameWindow.style.removeProperty('height'); };
         if (window.jQuery) $('#game_start').on('click', clearHeight);
         else gameStart.addEventListener('click', clearHeight);
@@ -516,8 +589,8 @@ button:not(.player-control-button):hover,
             </div>
         </div>
         <p>
-            <div style='text-decoration: color: #000000ff; font-family: Arial; font-weight: 500; font-size: 15px;'>
-Placeholder Text lmfao
+            <div style='text-decoration: color: #000000ff; font-family: Arial; font-weight: 500; font-size: 15px; letter-spacing: 2px;'>
+"'Mr President, help! Send help, please, before its too-AAARGGH!!'!'</p>\n\This is not a normal incumbency sim. You will need to fight for your survival and that of the nation, literally. The vast resources of the federal government are at your disposal, but mismanagement or overmanagement at any level can have catastrophic consequences. The American people look to you, President Gore, to save them from certain doom.",
             </div>
         </p>
         `;
