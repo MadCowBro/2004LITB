@@ -112,7 +112,123 @@ campaignTrail_temp.candidate_json = [
             "candidate_score": 1,
             "running_mate": true
         }
-    }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1003,
+        "fields": {
+            "first_name": "",
+            "last_name": "GOP",
+            "election": 20,
+            "party": "Republican",
+            "state": "Hopeful",
+            "priority": 1,
+            "description": "",
+            "color_hex": "#cb2a2aff",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1004,
+        "fields": {
+            "first_name": "",
+            "last_name": "Undecided",
+            "election": 20,
+            "party": "Independent",
+            "state": "Watching",
+            "priority": 1,
+            "description": "",
+            "color_hex": "#cfcf26ff",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1005,
+        "fields": {
+            "first_name": "",
+            "last_name": "Reform",
+            "election": 20,
+            "party": "Reform",
+            "state": "Dissatisfied",
+            "priority": 1,
+            "description": "",
+            "color_hex": "#cb2acbff",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    // Infection Map Candidates
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 2001,
+        "fields": {
+            "first_name": "",
+            "last_name": "Uninfected",
+            "election": 20,
+            "party": "Alive",
+            "state": "Afraid",
+            "priority": 1,
+            "description": "",
+            "color_hex": "#0068ffff",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 2002,
+        "fields": {
+            "first_name": "",
+            "last_name": "Infected",
+            "election": 20,
+            "party": "Undead",
+            "state": "Brains",
+            "priority": 1,
+            "description": "",
+            "color_hex": "#660000ff",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
 ]
 
 campaignTrail_temp.credits = "<button onclick='credits()'>The Zomb Squad</button>";
@@ -140,7 +256,10 @@ campaignTrail_temp.opponents_default_json = [
     {
         "election": 20,
         "candidates": [
-            1001
+            1001,
+            1003,
+            1004,
+            1005
         ]
     }
 ]
@@ -149,7 +268,10 @@ campaignTrail_temp.opponents_weighted_json = [
     {
         "election": 20,
         "candidates": [
-            1001
+            1001,
+            1003,
+            1004,
+            1005
         ]
     }
 ]
