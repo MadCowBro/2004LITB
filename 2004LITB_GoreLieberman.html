@@ -36827,13 +36827,14 @@ if (!element) {
 
 function switchMap() {
     if (map_flg === 1) {
-        e.opponents_list.splice(0, 1, 2001)
-        e.opponents_list.splice(1, 1, 2002)
+        e.opponents_list.splice(0, 1, 2001);
+        e.opponents_list.splice(1, 1, 2002);
+        e.opponents_list.splice(2);
     } else if (map_flg === 0) {
-        e.opponents_list.splice(0, 1, 1001)
-        e.opponents_list.splice(1, 1, 1003)
-        e.opponents_list.push(1004)
-        e.opponents_list.push(1005)
+        e.opponents_list.splice(0, 1, 1001);
+        e.opponents_list.splice(1, 1, 1003);
+        e.opponents_list.splice(2, 0, 1004);
+        e.opponents_list.splice(3, 0, 1005);
     }
 }
 
