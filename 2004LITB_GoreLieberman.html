@@ -36793,11 +36793,12 @@ function addMapButton() {
     newButton.addEventListener('click', () => {
         // Toggle the flag between 0 and 1
         map_flg = (map_flg === 0)
-            ? 0
-            : 1;
+            ? 1
+            : 0;
 
         // Now run your map switcher
         switchMap();
+        console.log("Done");
     });
 
     // Insert the new button next to the reference button
@@ -36829,47 +36830,16 @@ if (!element) {
 
 function switchMap() {
     if (map_flg === 1) {
-        campaignTrail_temp.opponents_default_json = [
-            {
-                "election": 20,
-                "candidates": [
-                    1001,
-                    2002
-                ]
-            }
-        ]
-        campaignTrail_temp.opponents_weighted_json = [
-            {
-                "election": 20,
-                "candidates": [
-                    1001,
-                    2002
-                ]
-            }
-        ]
+        e.opponents_list.splice(0, 1, 2001);
+        e.opponents_list.splice(1, 1, 2002);
+        e.opponents_list.splice(2);
+        console.log("Showing Infection Map");
     } else if (map_flg === 0) {
-        campaignTrail_temp.opponents_default_json = [
-            {
-                "election": 20,
-                "candidates": [
-                    1001,
-                    1003,
-                    1004,
-                    1005
-                ]
-            }
-        ]
-        campaignTrail_temp.opponents_weighted_json = [
-            {
-                "election": 20,
-                "candidates": [
-                    1001,
-                    1003,
-                    1004,
-                    1005
-                ]
-            }
-        ]
+        e.opponents_list.splice(0, 1, 1001);
+        e.opponents_list.splice(1, 1, 1003);
+        e.opponents_list.splice(2, 0, 1004);
+        e.opponents_list.splice(3, 0, 1005);
+        console.log("Showing Election Map");
     }
 }
 
