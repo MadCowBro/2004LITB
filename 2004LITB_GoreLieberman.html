@@ -36766,6 +36766,7 @@ campaignTrail_temp.candidate_last_name = "Gore";
 campaignTrail_temp.running_mate_last_name = "Lieberman";
 
 e = campaignTrail_temp
+e.cyoa = true
 
 let map_flg = 0;
 
@@ -36795,9 +36796,6 @@ function addMapButton() {
         map_flg = (map_flg === 0)
             ? 1
             : 0;
-
-        // Now run your map switcher
-        switchMap();
         console.log("Done");
     });
 
@@ -36828,7 +36826,9 @@ if (!element) {
 	document.body.appendChild(controlElement);
 }
 
-function switchMap() {
+cyoAdventure = function(a) {
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
+
     if (map_flg === 1) {
         e.opponents_list.splice(0, 1, 2001);
         e.opponents_list.splice(1, 1, 2002);
