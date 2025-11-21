@@ -8969,9 +8969,6 @@ campaignTrail_temp.running_mate_image_url = "https://i.postimg.cc/SQcshkkh/Liebe
 campaignTrail_temp.candidate_last_name = "Gore";
 campaignTrail_temp.running_mate_last_name = "Lieberman";
 
-e = campaignTrail_temp
-e.cyoa = true
-
 var Infection = 0;
 var Bill = 0;
 var Military = 0;
@@ -8979,79 +8976,6 @@ var Public = 0;
 var Funding = 0;
 var Health = 0;
 var Tipper = 0;
-
-let map_flg = 0;
-
-function addMapButton() {
-    // Check if the button already exists
-    if (document.getElementById('map_button')) {
-        return;
-    }
-
-    // Find the reference button by its ID
-    const refButton = document.getElementById('AdvisorButton');
-    if (!refButton) {
-        return;
-    }
-
-    // Create a new button element
-    const newButton = document.createElement('button');
-
-    newButton.id = 'map_button';
-
-    newButton.style.marginLeft = '1.5em';
-
-    newButton.innerHTML = 'Change Map';
-
-    newButton.addEventListener('click', () => {
-        // Toggle the flag between 0 and 1
-        map_flg = (map_flg === 0)
-            ? 1
-            : 0;
-        console.log("Done");
-    });
-
-    // Insert the new button next to the reference button
-    refButton.insertAdjacentElement('afterend', newButton);
-}
-
-function handleMutations(mutationsList, observer) {
-    if (observerRunning) return;
-    observerRunning = true;
-
-    addMapButton()
-
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-    observerRunning = false;
-}
-
-
-let observerRunning = false;
-
-var element = document.getElementById('controlElement');
-if (!element) {
-	let singleObserver = new MutationObserver(handleMutations);
-	singleObserver.observe(document.documentElement, { childList: true, subtree: true });
-	var controlElement = document.createElement('div');
-	controlElement.style.display = 'none';
-	controlElement.id = 'controlElement';
-	document.body.appendChild(controlElement);
-}
-
-cyoAdventure = function(a) {
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
-
-    if (map_flg === 1) {
-        e.opponents_list.splice(1, 1, 2002);
-        e.opponents_list.splice(2);
-        console.log("Showing Infection Map");
-    } else if (map_flg === 0) {
-        e.opponents_list.splice(1, 1, 1003);
-        e.opponents_list.splice(2, 0, 1004);
-        e.opponents_list.splice(3, 0, 1005);
-        console.log("Showing Election Map");
-    }
-}
 
 const InfectionMap = {
     "0": `<span style="color: #439124;">waiting.</span>`,
