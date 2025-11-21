@@ -9045,6 +9045,178 @@ cyoAdventure = function(a) {
     }
 }
 
+const InfectionMap = {
+    "0": `<span style="color: #439124;">waiting.</span>`,
+    "1": `<span style="color: #439124;">bubbling on the surface.</span>`,
+};
+const BillMap = {
+    "0": `<span style="color: #439124;">not been drafted.</span>`,
+};
+const MilitaryMap = {
+    "0": `<span style="color: #439124;">loyal to the cause.</span>`,
+};
+const PublicMap = {
+    "0": `<span style="color: #439124;">unaware.</span>`,
+    "1": `<span style="color: #439124;">afraid.</span>`,
+};
+const FundingMap = {
+    "0": `<span style="color: #439124;">like water.</span>`,
+};
+const HealthMap = {
+    "0": `<span style="color: #439124;">fine.</span>`,
+};
+const TipperMap = {
+    "0": `<span style="color: #E89A51;">concerned about you.</span>`,
+};
+
+function createSimplePopup() {
+    const popup = document.createElement("div");
+    popup.id = "simplePopup";
+    popup.style.position = "fixed";
+    popup.style.bottom = "20px";
+    popup.style.right = "20px";
+    popup.style.width = "326px";
+    popup.style.height = "218px";
+    popup.style.border = "1px solid #000";
+    popup.style.borderRadius = "5px";
+    popup.style.padding = "40px 10px 10px 10px";
+    popup.style.boxShadow = "0 0 5px rgba(0,0,0,0.2)";
+    popup.style.zIndex = "10000";
+    popup.style.fontFamily = "'Courier New', Courier, monospace";
+    popup.style.fontSize = "14px";
+    popup.style.color = "#000";
+    popup.style.backgroundImage = "url('https://i.postimg.cc/Jnk0zF2C/Brief-Background.png')";
+    popup.style.backgroundSize = "cover";
+    popup.style.backgroundRepeat = "no-repeat";
+    popup.style.backgroundPosition = "center";
+    popup.style.display = "block";
+
+    const content = document.createElement("div");
+    content.id = "popupContent";
+    content.style.pointerEvents = "auto";
+    popup.appendChild(content);
+
+    document.body.appendChild(popup);
+
+    makePopupDraggable(popup);
+    updateSimplePopup();
+}
+
+
+function makePopupDraggable(popup) {
+    let offsetX = 0;
+    let offsetY = 0;
+    let isDragging = false;
+
+    popup.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - popup.getBoundingClientRect().left;
+        offsetY = e.clientY - popup.getBoundingClientRect().top;
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+    });
+
+    function onMouseMove(e) {
+        if (!isDragging) return;
+        let newX = e.clientX - offsetX;
+        let newY = e.clientY - offsetY;
+        const maxX = window.innerWidth - popup.offsetWidth + 150;
+        const maxY = window.innerHeight - popup.offsetHeight + 150;
+        newX = Math.max(-50, Math.min(newX, maxX));
+        newY = Math.max(-50, Math.min(newY, maxY));
+        popup.style.left = `${newX}px`;
+        popup.style.top = `${newY}px`;
+        popup.style.bottom = "auto";
+        popup.style.right = "auto";
+    }
+
+    function onMouseUp() {
+        isDragging = false;
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+    }
+}
+
+function updateSimplePopup() {
+    const content = document.getElementById("popupContent");
+    if (!content) return;
+  
+    content.innerHTML = `
+      <p><strong>The INFECTION is ${InfectionMap[String(Infection)]}</strong></p>
+  
+      <p><strong>The PUBLIC ORDER BILL has ${BillMap[String(Bill)]}</strong></p>
+  
+      <p><strong>The MILITARY BRASS are ${MilitaryMap[String(Military)]}</strong></p>
+  
+      <p><strong>The PUBLIC remains ${PublicMap[String(Public)]}</strong></p>   
+  
+      <p><strong>The FEMA FUNDING flows ${FundingMap[String(Funding)]}</strong></p>
+  
+      <p><strong>Your MENTAL HEALTH is ${HealthMap[String(Health)]}</strong></p>
+  
+      <p><strong>Your beloved TIPPER is ${TipperMap[String(Tipper)]}</strong></p>
+    `;
+  }
+  
+
+function observeGameStats() {
+    const gameWindow = document.getElementById("game_window");
+    const config = { childList: true, subtree: true };
+    const observer = new MutationObserver(() => {
+        updateSimplePopup();
+    });
+    if (gameWindow) {
+        observer.observe(gameWindow, config);
+    }
+}
+
+function toggleSimplePopup() {
+    const popup = document.getElementById("simplePopup");
+    if (!popup) return;
+    popup.style.display = (popup.style.display === "none") ? "block" : "none";
+}
+
+function addHeadquarterButton() {
+    if (document.getElementById('headquarter_button')) return;
+    const refButton = document.getElementById('view_electoral_map');
+    if (!refButton) return;
+    const newButton = document.createElement('button');
+    newButton.id = 'headquarter_button';
+    newButton.style.marginLeft = '1.5em';
+    newButton.innerHTML = 'Fact Sheet';
+    newButton.addEventListener('click', toggleSimplePopup);
+    refButton.insertAdjacentElement('afterend', newButton);
+}
+
+createSimplePopup();
+observeGameStats();
+
+async function handleFooter() {
+    const gameWindow = document.getElementById('game_window');
+    addHeadquarterButton();
+}
+
+let observerRunning = false;
+
+async function handleMutations(mutationsList, observer) {
+    if (observerRunning) return;
+    observerRunning = true;
+    observer.disconnect();
+    addHeadquarterButton();
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    observerRunning = false;
+}
+
+var element = document.getElementById('controlElement');
+if (!element) {
+    let singleObserver = new MutationObserver(handleMutations);
+    singleObserver.observe(document.documentElement, { childList: true, subtree: true });
+    var controlElement = document.createElement('div');
+    controlElement.style.display = 'none';
+    controlElement.id = 'controlElement';
+    document.body.appendChild(controlElement);
+}
+
 campaignTrail_temp.jet_data = [{
     "nicknames": {
         "1001": "Gore",
