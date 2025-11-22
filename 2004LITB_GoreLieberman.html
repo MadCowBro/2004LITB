@@ -9011,7 +9011,7 @@ function createSimplePopup() {
     popup.style.height = "326px";
     popup.style.border = "1px solid #000";
     popup.style.borderRadius = "5px";
-    popup.style.padding = "100px 10px 10px 45px";
+    popup.style.padding = "40px 10px 10px 10px";
     popup.style.boxShadow = "0 0 5px rgba(0,0,0,0.2)";
     popup.style.zIndex = "10000";
     popup.style.fontFamily = "'Courier New', Courier, monospace";
@@ -9074,7 +9074,7 @@ function updateSimplePopup() {
     if (!content) return;
   
     content.innerHTML = `
-      <strong>The INFECTION is ${InfectionMap[String(Infection)]}</strong><br>
+      <br><br><br><br><strong>The INFECTION is ${InfectionMap[String(Infection)]}</strong><br>
   
       <br><strong>The PUBLIC ORDER BILL has ${BillMap[String(Bill)]}</strong><br>
   
