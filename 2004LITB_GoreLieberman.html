@@ -9015,7 +9015,7 @@ function createSimplePopup() {
     popup.style.boxShadow = "0 0 5px rgba(0,0,0,0.2)";
     popup.style.zIndex = "10000";
     popup.style.fontFamily = "'Courier New', Courier, monospace";
-    popup.style.fontSize = "20px";
+    popup.style.fontSize = "17px";
     popup.style.color = "#000";
     popup.style.backgroundImage = "url('https://i.postimg.cc/Jnk0zF2C/Brief-Background.png')";
     popup.style.backgroundSize = "cover";
@@ -9074,19 +9074,19 @@ function updateSimplePopup() {
     if (!content) return;
   
     content.innerHTML = `
-      <p><strong>The INFECTION is ${InfectionMap[String(Infection)]}</strong></p>
+      <strong>The INFECTION is ${InfectionMap[String(Infection)]}</strong>
   
-      <p><strong>The PUBLIC ORDER BILL has ${BillMap[String(Bill)]}</strong></p>
+      <br><strong>The PUBLIC ORDER BILL has ${BillMap[String(Bill)]}</strong>
   
-      <p><strong>The MILITARY BRASS are ${MilitaryMap[String(Military)]}</strong></p>
+      <br><strong>The MILITARY BRASS are ${MilitaryMap[String(Military)]}</strong>
   
-      <p><strong>The PUBLIC remains ${PublicMap[String(Public)]}</strong></p>   
+      <br><strong>The PUBLIC remains ${PublicMap[String(Public)]}</strong>  
   
-      <p><strong>The FEMA FUNDING flows ${FundingMap[String(Funding)]}</strong></p>
+      <br><strong>The FEMA FUNDING flows ${FundingMap[String(Funding)]}</strong>
   
-      <p><strong>Your MENTAL HEALTH is ${HealthMap[String(Health)]}</strong></p>
+      <br><strong>Your MENTAL HEALTH is ${HealthMap[String(Health)]}</strong>
   
-      <p><strong>Your beloved TIPPER is ${TipperMap[String(Tipper)]}</strong></p>
+      <br><strong>Your beloved TIPPER is ${TipperMap[String(Tipper)]}</strong>
     `;
   }
   
