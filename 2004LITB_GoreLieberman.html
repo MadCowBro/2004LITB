@@ -8982,7 +8982,7 @@ const InfectionMap = {
     "1": `<span style="color: #439124;">bubbling on the surface.</span>`,
 };
 const BillMap = {
-    "0": `<span style="color: #439124;">not been drafted.</span>`,
+    "0": `<span style="color: #711416;">not been drafted.</span>`,
 };
 const MilitaryMap = {
     "0": `<span style="color: #439124;">loyal to the cause.</span>`,
@@ -9015,7 +9015,7 @@ function createSimplePopup() {
     popup.style.boxShadow = "0 0 5px rgba(0,0,0,0.2)";
     popup.style.zIndex = "10000";
     popup.style.fontFamily = "'Courier New', Courier, monospace";
-    popup.style.fontSize = "16px";
+    popup.style.fontSize = "18px";
     popup.style.color = "#000";
     popup.style.backgroundImage = "url('https://i.postimg.cc/Jnk0zF2C/Brief-Background.png')";
     popup.style.backgroundSize = "cover";
@@ -9076,17 +9076,17 @@ function updateSimplePopup() {
     content.innerHTML = `
       <br><br><br><br><strong><div style="margin-left: 80px;">The INFECTION is ${InfectionMap[String(Infection)]}</div></strong><br>
   
-      <strong><div style="margin-left: 10px;">The PUBLIC ORDER BILL has ${BillMap[String(Bill)]}</div></strong><br>
+      <strong><div style="margin-left: 15px;">The PUBLIC ORDER BILL has ${BillMap[String(Bill)]}</div></strong><br>
   
-      <strong><div style="margin-left: 10px;">The MILITARY BRASS are ${MilitaryMap[String(Military)]}</div></strong><br>
+      <strong><div style="margin-left: 15px;">The MILITARY BRASS are ${MilitaryMap[String(Military)]}</div></strong><br>
   
-      <strong><div style="margin-left: 10px;">The PUBLIC remains ${PublicMap[String(Public)]}</div></strong><br>
+      <strong><div style="margin-left: 15px;">The PUBLIC remains ${PublicMap[String(Public)]}</div></strong><br>
   
-      <strong><div style="margin-left: 10px;">The FEMA FUNDING flows ${FundingMap[String(Funding)]}</div></strong><br>
+      <strong><div style="margin-left: 15px;">The FEMA FUNDING flows ${FundingMap[String(Funding)]}</div></strong><br>
   
-      <strong><div style="margin-left: 10px;">Your MENTAL HEALTH is ${HealthMap[String(Health)]}</div></strong><br>
+      <strong><div style="margin-left: 15px;">Your MENTAL HEALTH is ${HealthMap[String(Health)]}</div></strong><br>
   
-      <strong><div style="margin-left: 10px;">Your beloved TIPPER is ${TipperMap[String(Tipper)]}</div></strong>
+      <strong><div style="margin-left: 15px;">Your beloved TIPPER is ${TipperMap[String(Tipper)]}</div></strong>
     `;
   }
   
