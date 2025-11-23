@@ -25,21 +25,18 @@ campaignTrail_temp.temp_election_list = [
     }
 ]
 
-campaignTrail_temp.credits = "Our Team"
-
 const fontLink = document.createElement('link');
-fontLink.href = 'https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&display=swap';
+fontLink.href = 'https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap';
 fontLink.rel = 'stylesheet';
 document.head.appendChild(fontLink);
 
 const style = document.createElement('style');
 style.textContent = `
   #election_description_window {
-    font-family: 'Rubik 80s Fade', sans-serif;
+    font-family: 'Rubik Bubbles', sans-serif;
   }
 `;
 document.head.appendChild(style);
-
 
 campaignTrail_temp.global_parameter_json = [
     {
@@ -231,15 +228,16 @@ campaignTrail_temp.candidate_json = [
     },
 ]
 
-campaignTrail_temp.credits = "<button onclick='credits()'>The Zomb Squad</button>";
-  credits = function() {
+window.credits = function() {
     credits = ["Lead Dev: MadCowBro", "Coders: HouseyHouse", "Writers: MadCowBro", "Designers: richardbjameson", "Brainstormers: Haj8n, Sammyy, maskedmalarky, Me: the Fellow"]
     text = ""
     for (i in credits) {
-        text += credits[i] + "\n"
+      text += credits[i] + "\n"
     }
     alert(text)
-  }
+}
+campaignTrail_temp.credits = "<button onclick='credits()'>The Zomb Squad</button>";
+
 
 campaignTrail_temp.running_mate_json = [
     {
@@ -289,10 +287,6 @@ jet_data = {
 }
 
 //#startcode
-
-
-corrr = '\n              <h2>LIFE IN THE BALANCE</h2>\n            ';
-
 
 nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#d52080";
 
@@ -363,7 +357,7 @@ if (!document.querySelector('#radio-option-style')) {
 				border-image: initial;
                 box-shadow: 0 0 17px rgba(18, 60, 232, 0.65);
                 font-size: 18px;
-                font-family: Rubik 80s Fade;
+                font-family: Rubik Bubbles;
 			}
 			#election_image {
               width: 300px;
@@ -435,7 +429,7 @@ if (!document.querySelector('#radio-option-style')) {
     height: 28%;
     border: double;
     border-color: #2254de;
-    box-shadow:
+    box-shadow: 0 0 5px rgba(34, 84, 222, 0.8);
     float: right;
     margin-right: 13em;
     overflow: hidden;
@@ -452,71 +446,123 @@ if (!document.querySelector('#radio-option-style')) {
 }
 
 .overlay_window {
-  animation: fadeInScale 0.3s cubic-bezier(0.3, 1.2, 0.2, 1) forwards,
-             rainbowShift 18s linear infinite,
-             hologlow 1.5s ease-in-out infinite alternate;
-  opacity: 0;
-  background: linear-gradient(135deg, #000000, #111111, #1a1a1a, #000000);
-  background-size: 400% 400%;
-  border-radius: 0.7rem;
-  box-shadow:
-    0 0 1.4em rgba(255, 255, 255, 0.25),
-    0 0 3em rgba(255, 255, 255, 0.15);
-  display: flex;
-  flex-flow: column;
+  font-family: "Press Start 2P", monospace;
+  text-transform: uppercase;
+  background: repeating-linear-gradient(
+      90deg,
+      #0c0c0c,
+      #0c0c0c 6px,
+      #121212 6px,
+      #121212 12px
+  );
+  border: 4px solid transparent;
+  border-radius: 0;
+  padding: 1.5rem;
+  width: fit-content;
+  max-width: 90%;
+  left: 28%;
+  background-image:
+    linear-gradient(#0c0c0c, #0c0c0c),
+    linear-gradient(120deg, red, orange, yellow, lime, cyan, blue, violet, red);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
   color: #ffffff;
-  padding: 1.5em;
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.2),
+    0 0 35px rgba(255, 255, 255, 0.15);
 }
 
 .overlay_window h3 {
-  margin: 0;
-  padding: 0.6em 1em;
-  font-size: 1.4em;
-  background: #000000;
-  border-radius: 0.7rem 0.7rem 0 0;
-  color: #ffffff;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  background: black;
+  border-bottom: 4px solid #ffffff;
+  color: white;
   text-shadow:
-    0 0 6px #ffffff,
-    0 0 10px rgba(255, 255, 255, 0.75);
+    0 0 6px red,
+    0 0 12px yellow,
+    0 0 18px cyan;
+  letter-spacing: 2px;
 }
 
 .overlay_window p {
-  margin: 0.7em 0 0 0;
-  line-height: 1.5em;
-  color: #eaeaea;
+  font-size: 8px;
+  line-height: 4em;
+  margin: 0.8em 0;
+  color: #f2f2f2;
+  text-shadow:
+    0 0 4px red,
+    0 0 6px yellow,
+    0 0 8px cyan;
+}
+
+.overlay_window img {
+  margin-top: 1rem;
+  border: 4px solid #FFF;
+  image-rendering: pixelated;
+  box-shadow:
+    0 0 10px red,
+    0 0 18px cyan,
+    0 0 26px magenta;
+  animation: rainbowShift 7s linear infinite;
+}
+
+.visit_text {
+  margin-inline: auto;
+  margin-top: 1rem;
+  background: black;
+  padding: 0.6rem 1.2rem;
+  border: 3px solid transparent;
+  background-image:
+    linear-gradient(black, black),
+    linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, violet, red);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  color: white;
+  text-shadow:
+    0 0 5px cyan,
+    0 0 12px magenta;
 }
 
 @keyframes rainbowShift {
-  0% {
-    filter: hue-rotate(0deg);
-    background-position: 0% 50%;
-  }
-  50% {
-    filter: hue-rotate(180deg);
-    background-position: 100% 50%;
-  }
-  100% {
-    filter: hue-rotate(360deg);
-    background-position: 0% 50%;
-  }
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
 }
 
-@keyframes hologlow {
-  0% { box-shadow: 0 0 1em rgba(255, 255, 255, 0.2); }
-  100% { box-shadow: 0 0 2.2em rgba(255, 255, 255, 0.6); }
+@keyframes rainbowText {
+  0% { color: #ff7070; }
+  25% { color: #ffe066; }
+  50% { color: #87ff9e; }
+  75% { color: #7ad7ff; }
+  100% { color: #ff70f0; }
 }
 
-@keyframes fadeInScale {
-  0% { opacity: 0; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1); }
+@keyframes rainbowPulse {
+  0% { box-shadow: 0 0 10px red; }
+  20% { box-shadow: 0 0 10px orange; }
+  40% { box-shadow: 0 0 10px yellow; }
+  60% { box-shadow: 0 0 10px lime; }
+  80% { box-shadow: 0 0 10px cyan; }
+  100% { box-shadow: 0 0 10px magenta; }
+}
+
+@keyframes crtPop {
+  0% { transform: scale(0.75); opacity: 0; filter: brightness(0.4); }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes scanlines {
+  0% { filter: contrast(1) brightness(1); }
+  50% { filter: contrast(1.1) brightness(1.1); }
+  100% { filter: contrast(1) brightness(1); }
 }
 
 .visit_text {
   background: #222222;
   color: #ffffff;
   border-radius: .4em;
-  width: fit-content;
+    width: fit-content;
   margin-inline: auto;
   padding: .5rem 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -524,7 +570,7 @@ if (!document.querySelector('#radio-option-style')) {
 
 .overlay_window img {
 	margin-top: .7em;
-	border: solid;
+    border: solid;
 	border-color: #787878;
 }
 
@@ -535,6 +581,20 @@ if (!document.querySelector('#radio-option-style')) {
 	padding: .2em;
 	border-style: double;
 	border-color: #C9C9C9
+}
+
+.inner_window_sign_display {
+	margin: 0;
+	height: 25%;
+	position: relative;
+	width: 30%;
+	height: 28%;
+	background-color: #000000;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	border-color: #e52b2b;
 }
 
 #main_content_area {
@@ -569,7 +629,7 @@ if (!document.querySelector('#radio-option-style')) {
 
 .person_summary ul {
                 list-style: none;
-            }
+}
 
 .person_summary li::before {
                 content: "--> ";
@@ -580,7 +640,7 @@ if (!document.querySelector('#radio-option-style')) {
         padding: 0px;
         border-color: #FFF;
         background-color: transparent;
-      }
+}
 
       #candidate_description_window {
         background-color: #3a3a3aff;
@@ -602,7 +662,7 @@ if (!document.querySelector('#radio-option-style')) {
 
 #candidate_image, #running_mate_image {
   border: 7px solid #080808ff;
-  box-shadow:
+    box-shadow:
     0 0 12px rgba(215, 224, 48, 0.8),
     0 0 25px rgba(210, 144, 20, 0.8),
     0 0 8px rgba(222, 194, 36, 0.8);
@@ -613,19 +673,17 @@ button:not(.player-control-button), .btn, .is-info, .is-success, .is-primary, .i
   padding: 4px 12px;
   font-size: 10px;
   font-family:"Press Start 2P", monospace;
-  cursor: pointer;
+    cursor: pointer;
 
   background: #00b0ff;
   color: #ffffff;
 
   border: 3px solid #000000;
   border-radius: 0;
-
-  box-shadow:
+    box-shadow:
     0 0 0 3px #ffffff inset,
     4px 4px 0 #000000;
-
-  transition: transform 0.15s ease;
+    transition: transform 0.15s ease;
 }
 
 button:not(.player-control-button):hover,
@@ -635,14 +693,14 @@ button:not(.player-control-button):hover,
 .is-primary:hover,
 .is-secondary:hover {
   transform: translate(-3px, -3px);
-  box-shadow:
+    box-shadow:
     0 0 0 3px #ffffff inset,
     6px 6px 0 #000000;
 }
 
         `;
         document.head.appendChild(style);
-    }
+}
 
 // Psst: this is for replacing the site_description with this custom modal.
 (() => {
@@ -687,13 +745,14 @@ button:not(.player-control-button):hover,
     });
 
     if (gameStart) {
-        gameStart.innerHTML = '<strong>Lets Fricking Go</strong>';
+        gameStart.innerHTML = '<strong>Let’s Fricking Go</strong>';
         const clearHeight = () => { if (gameWindow) gameWindow.style.removeProperty('height'); };
         if (window.jQuery) $('#game_start').on('click', clearHeight);
         else gameStart.addEventListener('click', clearHeight);
     }
 
     function generatePrologueHTML({ imageSrc }) {
+        // Fixed: Corrected HTML string concatenation and escaped single quote in text
         return `
         <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px;">
             <div class="gradient-fade-right">
@@ -702,7 +761,8 @@ button:not(.player-control-button):hover,
         </div>
         <p>
             <div style='text-decoration: color: #000000ff; font-family: Arial; font-weight: 500; font-size: 15px; letter-spacing: 2px;'>
-"'Mr President, help! Send help, please, before its too-AAARGGH!!'!'</p>\n\This is not a normal incumbency sim. You will need to fight for your survival and that of the nation, literally. The vast resources of the federal government are at your disposal, but mismanagement or overmanagement at any level can have catastrophic consequences. The American people look to you, President Gore, to save them from certain doom.",
+"'Mr President, help! Send help, please, before its too-AAARGGH!!!'</p>\n\
+<p>This is not a normal incumbency sim. You will need to fight for your survival and that of the nation, literally. The vast resources of the federal government are at your disposal, but mismanagement or overmanagement at any level can have catastrophic consequences. The American people look to you, President Gore, to save them from certain doom.</p>
             </div>
         </p>
         `;
@@ -713,6 +773,451 @@ button:not(.player-control-button):hover,
 }
 
 appendStyle();
+
+function ensureStylesheet(url, id) {
+	if (id && document.getElementById(id)) {
+        if (id === 'unpkg-7css') {
+            const link = document.getElementById(id);
+if (link) link.remove();
+            return; 
+      
+    }
+        return;
+    }
+	if (document.querySelector('link[rel="stylesheet"][href="' + url + '"]')) return;
+const link = document.createElement('link');
+	link.rel = 'stylesheet';
+	link.href = url;
+	if (id) link.id = id;
+	document.head.appendChild(link);
+}
+
+
+
+function ensureMetaViewport() {
+    if (!document.querySelector('meta[name="viewport"]')) {
+        const m = document.createElement('meta');
+        m.name = 'viewport';
+        m.content = 'width=device-width, initial-scale=1';
+        document.head.appendChild(m);
+    }
+}
+
+applyGlobalStyles.sheets = {};
+
+function applyGlobalStyles(css, id = 'app-theme') {
+    if ('adoptedStyleSheets' in document && 'replaceSync' 
+in CSSStyleSheet.prototype) {
+        if (!applyGlobalStyles.sheets[id]) {
+            applyGlobalStyles.sheets[id] = new CSSStyleSheet();
+document.adoptedStyleSheets = [...document.adoptedStyleSheets, applyGlobalStyles.sheets[id]];
+        }
+        applyGlobalStyles.sheets[id].replaceSync(css);
+        return;
+    }
+
+    let el = document.getElementById(id);
+    if (!el) {
+        el = document.createElement('style');
+el.id = id;
+        document.head.appendChild(el);
+    }
+    el.textContent = css;
+}
+
+class Song {
+  constructor(title, artist, coverLink, audioLink) {
+    this.title = title;
+    this.artist = artist;
+this.coverLink = coverLink;
+    this.audioLink = audioLink;
+  }
+  getTitle() { return this.title; }
+  getArtist() { return this.artist;
+}
+  getCoverLink() { return this.coverLink; }
+  getAudioLink() { return this.audioLink;
+}
+}
+
+class Playlist {
+  constructor() {
+    this.songs = [];
+    this.currentSongIndex = 0;
+  }
+  addSong(song) { this.songs.push(song);
+}
+  getCurrentSong() { return this.songs[this.currentSongIndex]; }
+  playNext() { this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+}
+  playPrevious() { this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length; }
+}
+
+window.Playlist = Playlist;
+window.Song = Song;
+function changePlaylist(newPlaylist) {
+  playlist = newPlaylist;
+  playlist.currentSongIndex = 0;
+  updateUI(playlist);
+  const audio = document.getElementById("audio");
+  audio.src = playlist.getCurrentSong().audioLink;
+  audio.play();
+}
+window.changePlaylist = changePlaylist;
+
+function updateUI(playlist) {
+  const currentSong = playlist.getCurrentSong();
+  const player = document.getElementById("player");
+  if (!player) return;
+  player.querySelector("#cover").src = currentSong.getCoverLink();
+  player.querySelector("#title").textContent = currentSong.getTitle();
+  player.querySelector("#artist").textContent = currentSong.getArtist();
+
+  const listItems = player.querySelectorAll(".playlist-item");
+  listItems.forEach((li, idx) => {
+    li.classList.toggle("active", idx === playlist.currentSongIndex);
+  });
+}
+
+function setupMusicPlayer() {
+  playlist = new Playlist();
+
+  const songs = [
+    new Song("Ghost Town", "The Specials", "https://images2.imgbox.com/c5/b3/DR6ckUJf_o.png", "https://audio.jukehost.co.uk/SJeiun2nJbkn8tBMq9CIkdMBYYrDP6XU"),
+    new Song("She Wants To Move", "N.E.R.D", "https://images2.imgbox.com/13/46/CqfzCFhC_o.png", "https://audio.jukehost.co.uk/qDbHxlgmng4fqgEVEK4jjjgJPViujpPH"),
+    new Song("We Don't Care", "Kanye West", "https://images2.imgbox.com/27/2c/q2N5KNKE_o.png", "https://audio.jukehost.co.uk/gIbK6gS4tRCtMoGV2fmnk4PnqW59xqOS"),
+    new Song("Extraordinary Girl", "Green Day", "https://images2.imgbox.com/92/5c/QjhJYYUX_o.png", "https://audio.jukehost.co.uk/wMJlyYwhjL5dkSslPWiOYrxprZVe9BFa"),
+    new Song("Spiderhead", "Cage The Elephant", "https://images2.imgbox.com/58/15/sn6QeSxc_o.png", "https://audio.jukehost.co.uk/1AIuUdJRMZJOxd8WklXDgovDfEDoKW5O"),
+    new Song("Tiny Cities Made Of Ashes", "Modest Mouse", "https://images2.imgbox.com/05/93/r8nqpDMD_o.png", "https://audio.jukehost.co.uk/7k2vp4D8ZpxQHHWtw4H72sqiRoVxEv28"),
+    new Song("No Phone", "CAKE", "https://images2.imgbox.com/0f/1f/7BUd2lXJ_o.png", "https://audio.jukehost.co.uk/COQHhSHOYAY3d7RvxajPlqiHefUW4TKJ"),
+  ];
+  songs.forEach(s => playlist.addSong(s));
+
+  const existing = document.getElementById("player");
+  if (existing) existing.remove();
+
+  const playerContainer = document.createElement("div");
+  playerContainer.id = "player";
+  const leftCol = document.createElement("div");
+  leftCol.id = "player-left";
+  const cover = document.createElement("img");
+  cover.id = "cover";
+  cover.alt = "cover";
+  leftCol.appendChild(cover);
+  playerContainer.appendChild(leftCol);
+  const centerCol = document.createElement("div");
+  centerCol.id = "player-center";
+
+  const titleEl = document.createElement("div");
+  titleEl.id = "title";
+  centerCol.appendChild(titleEl);
+
+  const artistEl = document.createElement("div");
+  artistEl.id = "artist";
+  centerCol.appendChild(artistEl);
+
+  const controlsRow = document.createElement("div");
+  controlsRow.id = "controls-row";
+  controlsRow.className = "controls-only";
+
+  const prevBtn = document.createElement("button");
+  prevBtn.id = "prevButton";
+  prevBtn.className = "control-btn";
+  prevBtn.textContent = "⏮"; 
+  prevBtn.title = "Previous Song";
+  controlsRow.appendChild(prevBtn);
+
+  const playPauseBtn = document.createElement("button");
+  playPauseBtn.id = "playPauseButton";
+  playPauseBtn.className = "control-btn";
+  playPauseBtn.textContent = "►";
+  playPauseBtn.title = "Play";
+  controlsRow.appendChild(playPauseBtn);
+
+  const nextBtn = document.createElement("button");
+  nextBtn.id = "nextButton";
+  nextBtn.className = "control-btn";
+  nextBtn.textContent = "⏭"; 
+  nextBtn.title = "Next Song";
+  controlsRow.appendChild(nextBtn);
+
+  centerCol.appendChild(controlsRow);
+
+  const progressRow = document.createElement("div");
+  progressRow.id = "progress-row";
+  const progressInput = document.createElement("input");
+  progressInput.type = "range";
+  progressInput.id = "progress-bar";
+  progressInput.min = 0;
+  progressInput.max = 100;
+  progressInput.value = 0;
+  progressRow.appendChild(progressInput);
+  centerCol.appendChild(progressRow);
+
+  const volRow = document.createElement("div");
+  volRow.id = "volume-row";
+  const volSlider = document.createElement("input");
+  volSlider.type = "range";
+  volSlider.id = "volumeSlider";
+  volSlider.min = 0;
+  volSlider.max = 9;
+  volSlider.step = 1;
+  volSlider.value = 1;
+  volRow.appendChild(volSlider);
+  centerCol.appendChild(volRow);
+
+  playerContainer.appendChild(centerCol);
+
+  const rightCol = document.createElement("div");
+  rightCol.id = "player-right";
+  const playlistList = document.createElement("div");
+  playlistList.id = "playlist-list";
+  playlist.songs.forEach((song, i) => {
+    const item = document.createElement("div");
+    item.className = "playlist-item";
+    item.textContent = `${song.getTitle()} — ${song.getArtist()}`;
+    item.addEventListener("click", () => {
+      playlist.currentSongIndex = i;
+      audio.src = playlist.getCurrentSong().audioLink;
+      audio.play();
+      updateUI(playlist);
+    });
+    playlistList.appendChild(item);
+  });
+  rightCol.appendChild(playlistList);
+  playerContainer.appendChild(rightCol);
+
+  const gameWindow_player = document.getElementById("game_window");
+  if (gameWindow_player) gameWindow_player.insertAdjacentElement("afterend", playerContainer);
+  else document.body.appendChild(playerContainer);
+
+  const audio = document.createElement("audio");
+  audio.id = "audio";
+  audio.src = playlist.getCurrentSong().audioLink;
+  audio.volume = 1 / 9;
+  document.body.appendChild(audio);
+
+  playPauseBtn.addEventListener("click", function () {
+    if (audio.paused) audio.play(); else audio.pause();
+  });
+  audio.addEventListener("play", () => {
+    playPauseBtn.textContent = "❚❚";
+    playPauseBtn.title = "Pause";
+  });
+  audio.addEventListener("pause", () => {
+    playPauseBtn.textContent = "►";
+    playPauseBtn.title = "Play";
+  });
+  nextBtn.addEventListener("click", function () {
+    playlist.playNext();
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+    updateUI(playlist);
+  });
+  prevBtn.addEventListener("click", function () {
+    playlist.playPrevious();
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+    updateUI(playlist);
+  });
+  const progressEl = document.getElementById("progress-bar");
+
+  function smoothProgressUpdate() {
+    if (audio.duration) {
+      const value = (audio.currentTime / audio.duration) * 100;
+      progressEl.value = value;
+      const fill = `linear-gradient(to right, #51a8e2ff 0%, #51a8e2ff ${value}%, rgba(0,0,0,0.1) ${value}%, rgba(0,0,0,0.1) 100%)`;
+      progressEl.style.background = fill;
+    }
+    requestAnimationFrame(smoothProgressUpdate);
+  }
+  requestAnimationFrame(smoothProgressUpdate);
+
+  progressEl.addEventListener("input", () => {
+    if (audio.duration) audio.currentTime = (progressEl.value / 100) * audio.duration;
+  });
+  const volumeSlider = document.getElementById("volumeSlider");
+  volumeSlider.addEventListener("input", function () {
+    audio.volume = parseInt(volumeSlider.value, 10) / 9;
+  });
+  audio.addEventListener("ended", function () {
+    playlist.playNext();
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+    updateUI(playlist);
+  });
+  updateUI(playlist);
+}
+
+const style_player = document.createElement("style");
+style_player.textContent = `
+#player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 280px;
+  margin: 40px auto;
+  padding: 18px 12px 30px;
+  background: linear-gradient(180deg, #121212ff 0%, #000000ff 100%);
+  border: 6px solid #4410deff;
+  border-radius: 20px 20px 40px 40px;
+  box-shadow: inset 0 3px 8px #0005, 0 8px 18px #0008;
+  font-family: "Press Start 2P", monospace;
+  color: #121212;
+  position: relative;
+  overflow: hidden;
+}
+
+#player-left {
+  width: 220px;
+  height: 180px;
+  background: radial-gradient(circle at center, #0e0e0eff 0%, #000000ff 80%);
+  border: 5px inset #de2121ff;
+  border-radius: 6px;
+  box-shadow: inset 0 0 15px #0006, 0 2px 5px #000a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+#player-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  opacity: 0.8;
+  filter: contrast(1.3) saturate(1.2);
+}
+
+#player-center {
+  text-align: center;
+  width: 90%;
+  background: linear-gradient(180deg, #0e0e0eff 0%, #000000ff 100%);
+  border: 3px inset #de2121ff;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: inset 0 3px 5px #0004;
+}
+#title {
+  font-size: 10px;
+  margin-bottom: 5px;
+  color: #e2bc17ff;
+}
+#artist {
+  font-size: 8px;
+  color: #e2bc17ff;
+}
+
+.controls-only .control-btn {
+  all: unset;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #111 0%, #000 95%);
+  color: #00ffcc;
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 8px #00ffcc;
+  transition: all 0.15s ease-in-out;
+}
+.controls-only .control-btn:hover {
+  background: #00ffcc;
+  color: #000;
+  box-shadow: 0 0 15px #00ffcc;
+  transform: scale(1.05);
+}
+
+#controls-row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 16px 0 12px;
+}
+
+#progress-row {
+  width: 88%;
+  background: #66e83bff;
+  border: 3px inset #de2121ff;
+  padding: 6px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+#progress-bar {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 6px;
+  background: #607b4c;
+  border-radius: 3px;
+  outline: none;
+}
+#progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  background: #111;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#volume-row {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  background: #66e83bff;
+  border: 2px inset #5e13e1ff;
+  border-radius: 4px;
+  padding: 4px;
+  margin-bottom: 12px;
+}
+#volumeSlider {
+  width: 80px;
+  -webkit-appearance: none;
+  height: 6px;
+  background: #5fa724ff;
+  border-radius: 3px;
+}
+#volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #111;
+}
+
+#player-right {
+  width: 90%;
+  background: #000000ff;
+  border: 3px inset #de2121ff;
+  border-radius: 6px;
+  padding: 6px;
+  max-height: 110px;
+  overflow-y: auto;
+  box-shadow: inset 0 1px 4px #0007;
+}
+.playlist-item {
+  font-size: 7px;
+  line-height: 1.5;
+  cursor: pointer;
+  color: #66e83bff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.playlist-item.active {
+  color: #e21d1d;
+  font-weight: bold;
+}
+`;
+document.head.appendChild(style_player);
+
+setupMusicPlayer();
 
 function addDynamicCSS() {
     var css = `
