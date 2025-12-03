@@ -1338,17 +1338,39 @@ function addDynamicCSS() {
 
 addDynamicCSS();
 
+// Create style element
+const crtStyle = document.createElement("style");
 document.head.appendChild(crtStyle);
-  let crtOn = true;
-  var setCRTLines = (enabled) => {
-    crtStyle.innerText = enabled ? "" : ".crt::before {background: none;}";
-  }
-  footer = $(".footer")[0]
-  var button = document.createElement("button") // <button onclick="changeBanner()" style="font-weight: bold; height:19.49px; position: static; right: 770px; top: 0px;">Change banner</button>
-  button.style = font-weight: bold; height:19.49px; position: static; right: 770px; top: 0px;
-  button.innerHTML = "Toggle CRT Lines"
-  footer.insertBefore(button, footer.firstChild);
-  button.addEventListener("click", () => {crtOn = !crtOn; setCRTLines(crtOn)});
+
+let crtOn = true;
+
+const setCRTLines = (enabled) => {
+  crtStyle.innerText = enabled ? "" : ".crt::before { background: none; }";
+};
+
+// Select footer
+const footer = $(".footer")[0];
+
+// Create button
+const button = document.createElement("button");
+button.innerHTML = "Toggle CRT Lines";
+
+// Correct styling
+button.style.fontWeight = "bold";
+button.style.height = "19.49px";
+button.style.position = "static";
+button.style.right = "770px";
+button.style.top = "0px";
+
+// Insert button
+footer.insertBefore(button, footer.firstChild);
+
+// Toggle listener
+button.addEventListener("click", () => {
+  crtOn = !crtOn;
+  setCRTLines(crtOn);
+});
+
 		
 tooltipList = [
   {searchString: "Trump", explanationText: "<img src=https://images2.imgbox.com/e7/5b/xGvHSmAD_o.png> Your old opponent, pretty funny guy."},
