@@ -286,18 +286,6 @@ jet_data = {
     "gameTitle": "LIFE IN THE BALANCE"
 }
 
-document.head.appendChild(crtStyle);
-  let crtOn = true;
-  var setCRTLines = (enabled) => {
-    crtStyle.innerText = enabled ? "" : ".crt::before {background: none;}";
-  }
-  footer = $(".footer")[0]
-  var button = document.createElement("button") // <button onclick="changeBanner()" style="font-weight: bold; height:19.49px; position: static; right: 770px; top: 0px;">Change banner</button>
-  button.style = font-weight: bold; height:19.49px; position: static; right: 770px; top: 0px;
-  button.innerHTML = "Toggle CRT Lines"
-  footer.insertBefore(button, footer.firstChild);
-  button.addEventListener("click", () => {crtOn = !crtOn; setCRTLines(crtOn)});
-
 //#startcode
 
 nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#d52080";
@@ -1350,6 +1338,18 @@ function addDynamicCSS() {
 
 addDynamicCSS();
 
+document.head.appendChild(crtStyle);
+  let crtOn = true;
+  var setCRTLines = (enabled) => {
+    crtStyle.innerText = enabled ? "" : ".crt::before {background: none;}";
+  }
+  footer = $(".footer")[0]
+  var button = document.createElement("button") // <button onclick="changeBanner()" style="font-weight: bold; height:19.49px; position: static; right: 770px; top: 0px;">Change banner</button>
+  button.style = font-weight: bold; height:19.49px; position: static; right: 770px; top: 0px;
+  button.innerHTML = "Toggle CRT Lines"
+  footer.insertBefore(button, footer.firstChild);
+  button.addEventListener("click", () => {crtOn = !crtOn; setCRTLines(crtOn)});
+		
 tooltipList = [
   {searchString: "Trump", explanationText: "<img src=https://images2.imgbox.com/e7/5b/xGvHSmAD_o.png> Your old opponent, pretty funny guy."},
   {searchString: "Placeholder 2", explanationText: "<img src=https://i.imgur.com/PUT IMGUR LINK HERE> Put the Text Here"}
