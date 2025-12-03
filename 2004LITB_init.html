@@ -328,6 +328,13 @@ if (gameWindow) {
     gameWindow.style.boxShadow = "0 0 17px rgba(57, 222, 84, 0.8)";
 }
 
+    document.head.innerHTML += `<link
+      rel="stylesheet"
+      href="https://jetsimon.com/public/crt.css"
+    >`
+    
+    document.body.classList.add("crt");
+
 $("#game_window")[0].style.backgroundImage = "url(https://images2.imgbox.com/42/13/ujTe4POz_o.png)"
 
 e = campaignTrail_temp
@@ -1338,6 +1345,21 @@ function addDynamicCSS() {
 
 addDynamicCSS();
 
+let crtStyle = document.createElement('style');
+document.head.appendChild(crtStyle);
+
+let crtOn = true;
+var setCRTLines = (enabled) => {
+    crtStyle.innerText = enabled ? "" : ".crt::before {background: none;}";
+}
+footer = $(".footer")[0]
+var button = document.createElement("button") // <button onclick="changeBanner()" style="font-weight: bold; height:35px; position: static; right: 770px; top: 0px;">Change banner</button>
+button.style = `font-weight: bold; height:19.49px; position: static; right: 770px; top: 0px;`
+button.innerHTML = "Toggle CRT Lines"
+footer.insertBefore(button, footer.firstChild);
+button.addEventListener("click", () => {crtOn = !crtOn; setCRTLines(crtOn)});
+
+		
 tooltipList = [
   {searchString: "Trump", explanationText: "<img src=https://images2.imgbox.com/e7/5b/xGvHSmAD_o.png> Your old opponent, pretty funny guy."},
   {searchString: "Placeholder 2", explanationText: "<img src=https://i.imgur.com/PUT IMGUR LINK HERE> Put the Text Here"}
