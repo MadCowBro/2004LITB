@@ -10,10 +10,10 @@ campaignTrail_temp.questions_json = [
     },
     {
         "model": "campaign_trail.question",
-        "pk": 367,
+        "pk": 20000,
         "fields": {
             "priority": 1,
-            "description": "What key points will you emphasize as you accept your party's nomination for President of the United States?",
+            "description": "During your daily morning briefing, Chief of Staff Ron Klain and HHS Secretary David Satcher present you several photos of deeply ill hospital patients with decomposing skin. They reference a “violent pathogen of unknown origin” near Waco TX that includes unnerving reports of patients attacking hospital staff. Satcher speculates it’s a more advanced and deadly form of rabies, which can spread rapidly if left unchecked, particularly in rural and secluded areas. They await your orders.",
             "likelihood": 1
         }
     },
@@ -249,6 +249,38 @@ campaignTrail_temp.answers_json = [
         "fields": {
             "question": 10000,
             "description": "It is getting late. I tell you what, sweetie, I do need to finish up here, but I promise to be quick and I’ll see you hopefully before you drift off to sleep. How’s that?"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 20001,
+        "fields": {
+            "question": 20000,
+            "description": "This looks deeply concerning, but Texas is notorious for wanting to these sort of matters in-house. Be prepared to offer assistance should they request it. Otherwise, let’s stay out of their way and hope they surpress this pathogen quickly."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 20002,
+        "fields": {
+            "question": 20000,
+            "description": "Waco… that’s near Governor Bush’s hometown, isn’t it? I must get in touch with him so we can coordinate a proper response. Immediately."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 20003,
+        "fields": {
+            "question": 20000,
+            "description": "Send a CDC team to the area, so we may assess for ourselves how dangerous this pathogen might be. This cannot escalate any further. I expect frequent updates."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 20004,
+        "fields": {
+            "question": 20000,
+            "description": "After 9/11 and the anthrax attacks, we have no choice but to treat this as the worst case scenario. Get FEMA down there to establish a quarantine zone. We must contain this."
         }
     }
 ]
@@ -6671,22 +6703,22 @@ campaignTrail_temp.candidate_state_multiplier_json = [
 campaignTrail_temp.answer_score_global_json = [
     {
         "model": "campaign_trail.answer_score_global",
-        "pk": 1005,
+        "pk": 20009,
         "fields": {
-            "answer": 3502,
+            "answer": 20004,
             "candidate": 1001,
             "affected_candidate": 1001,
-            "global_multiplier": -0.01
+            "global_multiplier": -0.015
         }
     },
     {
         "model": "campaign_trail.answer_score_global",
-        "pk": 1006,
+        "pk": 20010,
         "fields": {
-            "answer": 3502,
+            "answer": 20004,
             "candidate": 1001,
-            "affected_candidate": 1004,
-            "global_multiplier": 0.025
+            "affected_candidate": 1005,
+            "global_multiplier": 0.011
         }
     }
 ]
@@ -6720,6 +6752,136 @@ campaignTrail_temp.answer_score_issue_json = [
             "issue": 28,
             "issue_score": 0,
             "issue_importance": 5
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20011,
+        "fields": {
+            "answer": 20001,
+            "issue": 27,
+            "issue_score": -0.15,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20012,
+        "fields": {
+            "answer": 20001,
+            "issue": 28,
+            "issue_score": -0.275,
+            "issue_importance": 6
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20013,
+        "fields": {
+            "answer": 20001,
+            "issue": 29,
+            "issue_score": 0.4,
+            "issue_importance": 6
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20014,
+        "fields": {
+            "answer": 20001,
+            "issue": 30,
+            "issue_score": 0.4,
+            "issue_importance": 6
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20015,
+        "fields": {
+            "answer": 20002,
+            "issue": 28,
+            "issue_score": -0.15,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20016,
+        "fields": {
+            "answer": 20002,
+            "issue": 31,
+            "issue_score": -0.275,
+            "issue_importance": 6
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20017,
+        "fields": {
+            "answer": 20003,
+            "issue": 28,
+            "issue_score": 0.4,
+            "issue_importance": 6
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20018,
+        "fields": {
+            "answer": 20003,
+            "issue": 30,
+            "issue_score": -0.275,
+            "issue_importance": 6
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20019,
+        "fields": {
+            "answer": 20003,
+            "issue": 31,
+            "issue_score": 0.4,
+            "issue_importance": 6
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20020,
+        "fields": {
+            "answer": 20004,
+            "issue": 28,
+            "issue_score": 0.6,
+            "issue_importance": 9
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20021,
+        "fields": {
+            "answer": 20004,
+            "issue": 29,
+            "issue_score": -0.55,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20022,
+        "fields": {
+            "answer": 20004,
+            "issue": 30,
+            "issue_score": -0.55,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 20023,
+        "fields": {
+            "answer": 20004,
+            "issue": 31,
+            "issue_score": 0.6,
+            "issue_importance": 9
         }
     }
 ]
@@ -6757,6 +6919,50 @@ campaignTrail_temp.answer_score_state_json = [
             "affected_candidate": 2002,
             "state_multiplier": 0.03
         }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 20024,
+        "fields": {
+            "answer": 20001,
+            "state": 223,
+            "candidate": 1001,
+            "affected_candidate": 2002,
+            "state_multiplier": 1.6
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 20025,
+        "fields": {
+            "answer": 20002,
+            "state": 223,
+            "candidate": 1001,
+            "affected_candidate": 2002,
+            "state_multiplier": 1.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 20026,
+        "fields": {
+            "answer": 20003,
+            "state": 223,
+            "candidate": 1001,
+            "affected_candidate": 2002,
+            "state_multiplier": 0.8
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 20027,
+        "fields": {
+            "answer": 20004,
+            "state": 223,
+            "candidate": 1001,
+            "affected_candidate": 2002,
+            "state_multiplier": 0.4
+        }
     }
 ]
 
@@ -6786,6 +6992,42 @@ campaignTrail_temp.answer_feedback_json = [
             "answer": 10003,
             "candidate": 1001,
             "answer_feedback": "You’re not completely satisfied with the planning, but you retire to the residence anyway, only to find Tipper deep asleep. You crawl into bed next to her and put your hands around her waist, slowly falling into a restless sleep."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 20005,
+        "fields": {
+            "answer": 20001,
+            "candidate": 1001,
+            "answer_feedback": "You try busying yourself with various other issues, but it keeps gnawing at you. Eventually, after Vice President Lieberman again implores you to send troops to Iraq, you tell him to check with Texas officials just so you can get him out of your office."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 20006,
+        "fields": {
+            "answer": 20002,
+            "candidate": 1001,
+            "answer_feedback": "Despite several attempts, you fail to get through to him. No one in the Governor’s office has either. You pretend he’s fine, but something isn’t right. You feel it in your gut."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 20007,
+        "fields": {
+            "answer": 20003,
+            "candidate": 1001,
+            "answer_feedback": "In less than 24 hours, the CDC sets up mobile labs at Baylor University and begins collecting samples. However, only limited data is sent before you lose contact with them. This cannot be coincidental."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 20008,
+        "fields": {
+            "answer": 20004,
+            "candidate": 1001,
+            "answer_feedback": "You sign an emergency order establishing a federal quarantine in western McLennan County. The immediate insertion of the federal government into the outbreak response enrages local and state officials, but there’s no time for political games. Decisive action is necessary."
         }
     }
 ]
