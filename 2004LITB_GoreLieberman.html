@@ -7169,13 +7169,13 @@ const nominees = {
     lieberman: {
       name: 'Joe Lieberman',
       imgURL: 'https://itsastronomical.com/assets/1924/opp/gatsby.png',
-      isActive: gatsby,
+      isActive: false,
       bioText: '<h5>Former Vice President</h5><center><img src="https://itsastronomical.com/assets/1924/opp/jaygatsby.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>How could a man like Jay Gatsby receive the Democratic nomination, anyway?</p><p>With no political experience, a man only known for throwing lavish parties would have to have woo delegates over, one by one.</p><p>In the event of his nomination, it is hard to say what a campaign would look like. The best attack we can currently come up with is one against his lack of government experience.</p>'
     },
     norris: {
       name: 'Chuck Norris',
       imgURL: 'https://itsastronomical.com/assets/1924/opp/cox.png',
-      isActive: ralstonDies,
+      isActive: false,
       bioText: '<h5>Actor</h5><center><img src="https://itsastronomical.com/assets/1924/opp/cox.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>The tragic passing of Mr. Ralston has meant that your opponent will be James Cox, the runner up in 1920.</p><p>With so little time during the campaign, it is hard to see how or what you could attack him on. Perhaps it may be better to be Silent Cal.</p>'
     },
 };
@@ -7325,6 +7325,18 @@ async function handleFooter() {
 
 // A giant mishmash of code from LBM, Bob’s Macarena, 1924 and MTE
 function openHeadquarter() {
+
+    let questionPK = null;
+
+    try {
+        const ans = document.querySelector('#question_form .game_answers');
+        if (ans?.value) {
+            const answerPK = ans.value;
+            const source = e?.answers_json || campaignTrail_temp.answers_json;
+            const found = source.find(a => String(a.pk) === String(answerPK));
+            if (found?.fields?.question) questionPK = found.fields.question;
+        }
+    } catch {}
     
     const questions = document.querySelector(".inner_window_question");
     if (questions) questions.style.display = 'none';
