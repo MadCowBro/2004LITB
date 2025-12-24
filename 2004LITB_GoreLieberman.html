@@ -7037,6 +7037,8 @@ campaignTrail_temp.running_mate_image_url = "https://i.postimg.cc/SQcshkkh/Liebe
 campaignTrail_temp.candidate_last_name = "Gore";
 campaignTrail_temp.running_mate_last_name = "Lieberman";
 
+e = campaignTrail_temp
+
 var Infection = 0;
 var Bill = 0;
 var Military = 0;
@@ -7446,7 +7448,6 @@ function openHeadquarter() {
     } else {
         document.body.appendChild(hqDiv);
     }
-}
 
     // Create a container div for both columns
     let columnsDiv = document.createElement('div');
@@ -7735,93 +7736,8 @@ for (const [id, nominee] of Object.entries(nominees)) {
         cap.style.textAlign = "center";
         cap.style.fontSize = "12px";
         rightSide.appendChild(cap);
-    }
 
     updateWindowContent(questionPK);
-}
-
-    const opponentContainer = document.createElement('div');
-    opponentContainer.style.cssText = 'flex: 1; min-width: 320px; padding-left: 20px; border-left: 1px solid rgba(255,255,255,0.2); box-sizing: border-box; color: white; text-shadow: 0 1px 3px #000;';
-    
-    const opponentTitleText = opponentIsLocked ? "Republican Nominee" : "The Other Side";
-    opponentContainer.innerHTML = `<h3 style="border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; margin-top:0;">${opponentTitleText}</h3>`;
-    
-    // display top 2 opponents as cards
-    topOpponents.slice(0, 2).forEach((opponent, index) => {
-        const opponentCard = document.createElement('div');
-        opponentCard.style.cssText = `
-            background: rgba(0,0,0,0.3);
-            border: 2px solid ${index === 0 ? '#c62828' : '#ffa726'};
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        `;
-        
-        const badgeColor = index === 0 ? '#c62828' : '#ffa726';
-        const badgeText = index === 0 ? 'FRONTRUNNER' : 'CONTENDER';
-        
-        const badge = document.createElement('div');
-        badge.style.cssText = `
-            background: ${badgeColor};
-            color: white;
-            font-size: 0.7em;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        `;
-        badge.innerText = badgeText;
-        opponentCard.appendChild(badge);
-        
-        const profileRow = document.createElement('div');
-        profileRow.style.cssText = 'display: flex; align-items: flex-start; gap: 12px;';
-        
-        const img = document.createElement('img');
-        img.src = opponent.picture;
-        img.style.cssText = `
-            width: 70px;
-            height: 87px;
-            border: 2px ridge ${badgeColor};
-            border-radius: 6px;
-            object-fit: cover;
-            flex-shrink: 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-        `;
-        
-        const textDiv = document.createElement('div');
-        textDiv.style.flex = '1';
-        textDiv.innerHTML = `
-            <h4 style="margin: 0 0 6px 0; font-size: 1.2em; font-weight: bold;">${opponent.name}</h4>
-            <p style="margin: 0; font-size: 0.85em; line-height: 1.4; opacity: 0.95;">${opponent.advice}</p>
-        `;
-        
-        profileRow.appendChild(img);
-        profileRow.appendChild(textDiv);
-        opponentCard.appendChild(profileRow);
-        opponentContainer.appendChild(opponentCard);
-    });
-
-    // show third contender as smaller mention if available
-    if (topOpponents[2]) {
-        const mentionDiv = document.createElement('div');
-        mentionDiv.style.cssText = `
-            background: rgba(255,255,255,0.1);
-            border-left: 3px solid #999;
-            padding: 8px 12px;
-            margin-top: 8px;
-            border-radius: 4px;
-            font-size: 0.85em;
-            opacity: 0.8;
-        `;
-        mentionDiv.innerHTML = `<strong>${topOpponents[2].name}</strong> is also in the race but trailing significantly.`;
-        opponentContainer.appendChild(mentionDiv);
-    }
-
-    contentRow.appendChild(opponentContainer);
-    container.appendChild(contentRow);
 }
 
 function updateWindowContent(questionPK) {
