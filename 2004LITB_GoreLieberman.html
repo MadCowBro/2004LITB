@@ -7045,6 +7045,8 @@ var Funding = 0;
 var Health = 0;
 var Tipper = 0;
 
+var AGENDAGUI = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // set stuff to 1 to update the GUI
+
 const InfectionMap = {
     "0": `<span style="color: #439124;"><u>waiting.</u></span>`,
     "1": `<span style="color: #439124;"><u>bubbling on the surface.</u></span>`,
@@ -7067,6 +7069,129 @@ const HealthMap = {
 };
 const TipperMap = {
     "0": `<span style="color: #E89A51;"><u>concerned about you.</u></span>`,
+};
+
+e.initDC = false;
+
+let savedX = null;
+let savedY = null;
+
+var pictureDict2 = pictureDict2 || { 0: "https://files.catbox.moe/fswvy9.png" }; // [!] If this somehow appears while testing, some shit's wrong with what you're coding [!]
+
+// The PK you assign to each doesn't really matter as long as they're unique to each, and you match everything that requires advisor PKs with their respective advisors
+
+var advisors = [
+    { pk: 101, name: "<b><strong>First Lady Tipper Gore</strong></b>", picture: "https://files.catbox.moe/vduikg.png" },
+    { pk: 102, name: "<b><strong>Vice President Joe Lieberman</strong></b>", picture: "https://files.catbox.moe/zszmb5.png" },
+    { pk: 103, name: "<b><strong>Secretary of Defense Sam Nunn</strong></b>", picture: "https://files.catbox.moe/ggr767.png" },
+    { pk: 104, name: "<b><strong>HHS Secretary David Satcher</strong></b>", picture: "https://files.catbox.moe/9kwout.png" },
+    { pk: 105, name: "<b><strong>Chief of Staff Ron Klain</strong></b>", picture: "https://files.catbox.moe/9kwout.png" },
+];
+
+// Advice List order: Advisor PK / Question PK / Advice text
+
+var adviceList = [
+{advisor_pk:101,question_pk:10000,advice:"<b>Please come to bed, honey.</b>"},
+  {advisor_pk:102,question_pk:10000,advice:"<b>Don’t look at me. She’s your wife.</b>"},
+  {advisor_pk:105,question_pk:10000,advice:"<b>We’ve got it taken care of here, Mr. President.</b>"},
+
+  {advisor_pk:101,question_pk:20000,advice:"<b>Oh dear. This sounds serious, Al.</b>"},
+  {advisor_pk:102,question_pk:20000,advice:"<b>This sounds like a Texas problem, sir. Best to stay out of their business.</b>"},
+  {advisor_pk:103,question_pk:20000,advice:"<b>Could this possibly be another terrorist attack?</b>"},
+  {advisor_pk:104,question_pk:20000,advice:"<b>I advise you take immediate action, Mr. President.</b>"},
+
+{advisor_pk:105,question_pk:20000,advice:"<b>I concur with Secretary Satcher, Mr. President.</b>"}
+];
+
+const nominees = {
+    mccain: {
+      name: 'John McCain',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/mcadoo.png',
+      isActive: true,
+      bioText: '<h5>United States Senator from Arizona</h5><center><img src="https://itsastronomical.com/assets/1924/opp/mcadoo.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center><p>A staunch Wilsonian and prohibitionist, McAdoo is a favorite of Southern Democrats and progressives alike. However, McAdoo has a variety of struggles relating to a retainer he took from Edward Doheny in 1921.</p><p>In that case, it is unlikely he will be able to secure the nomination barring a rapid change in the political climate. With the 2/3rds rule at the Democratic National Convention, he may very well be requires to make moves that would unify the party for a chance at the White House.</p><p>The best bet in order to defeat him in the event of his nomination would be to find ways to break apart any Democratic Unity.</p>'
+    },
+    giuliani: {
+      name: 'Rudy Giuliani',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/underwood.png',
+      isActive: true,
+      bioText: '<h5>Former Mayor of New York City</h5><center><img src="https://itsastronomical.com/assets/1924/opp/underwood.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>As one of the few anti-Klan candidates from the south, Underwood represents an almost bizarre and paradoxical faction of the Democratic Party. As House Majority Leader in the early 1910s, Underwood was crucial in the passage of tariff reduction and the income tax.</p><p>His nomination is quite unlikely. For starters, there would have to be significant movement of pro-Klan forces away from the Democratic Party, one way or another. Additionally, the Republican Party must not be in the best of shape if the Democratic Party is willing to agree to such a compromise candidate.</p><p>The best bet in order to defeat him in the event of his nomination would be to hammer him on his anti-Prohibition stances, which are out of touch with his coalition.</p>'
+    },
+    dubya: {
+      name: 'George W. Bush',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/smith.png',
+      isActive: true,
+      bioText: '<h5>Governor of Texas, 2000 Republican Presidential Nominee</h5><center><img src="https://itsastronomical.com/assets/1924/opp/smith.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>Governor Smith of New York seems to represent the natural outcome of ethnic support sweltering up in the Democratic Party. Unlike much of the west and south, he is strongly anti-Klan, anti-Prohibition, and pro-Immigration.</p><p>His nomination is quite unlikely. The simple fact of the matter is that the 2/3rds rule would almost gurantee he is not nominated - tragedy for him, the northeast alone cannot carry him the nomination. There would have to be some kind of unprecedented movement of pro-Klan forces away from the Democratic Party</p><p>In the event of his nomination, victory would be almost assured. Our estimations suggest you could win parts of the south if the Democratic Party chooses to nominate Governor Smith.</p>'
+    },
+    jeb: {
+      name: 'Jeb Bush',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/marshall.png',
+      isActive: true,
+      bioText: '<h5>Governor of Florida</h5><center><img src="https://itsastronomical.com/assets/1924/opp/marshall.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>Thomas Marshall had his named placed in for consideration in 1920, but nothing came of it. With Wilson out of the picture, there is hope from his allies that he could be nominated. </p><p>The chance of Marshall being nominated is quite low. Given his age, it is difficult to see him securing the backing of large amounts of the delegates. There would have to be sudden movement by your administration that causes bigger names like Smith or McAdoo to skip this election.</p><p>In the event of his nomination, it is hard to see how someone like Mr. Marshall could turn the campaign around. His age would make campaigning difficult, and his ties to the Wilson administration and behavior during the former President’s stroke seem to be a sour point.</p>'
+    },
+    ridge: {
+      name: 'Tom Ridge',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/ralston.png',
+      isActive: true,
+      bioText: '<h5>Governor of Pennsylvania</h5><center><img src="https://itsastronomical.com/assets/1924/opp/ralston.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>Samuel Ralston is seen as one of the frontrunners for the nomination. He has positions similar to McAdoo on progressive reform, but lacks the lingering stench of corruption that he suffers from.</p><p>It is easy to see Ralston securing the nomination, though the consensus is he would be hesitant to accept it. Perhaps strong movement on the issue of civil rights could be the pull pro-Ralston forces need to get him into the race.</p><p>In the event of his nomination, he may be able to win his home state of Indiana, which might be important to your re-election. If he and La Follette are doing well in their respective regions, it could spell trouble for him. However, his health might be of some concern...</p>'
+    },
+    thompson: {
+      name: 'Fred Thompson',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/ford.png',
+      isActive: true,
+      bioText: '<h5>United States Senator from Tennessee</h5><center><img src="https://itsastronomical.com/assets/1924/opp/ford.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>A "Draft Ford" movement has taken shape, and it would not be the first foray by the businessman into the political sphere. In 1918, he was unsuccessfully a candidate for United States Senate in Michigan.</p><p>With his popularity and personal wealth, Ford would make a formidable compromise candidate. He most likely would be able to secure the nomination if corruption is removed as an issue, action on civil rights is taken, and progressives have a lot of influence in the Republican Party.</p><p>In the event of his nomination, he would likely increase Democratic support in the Mid-west, a key region necessary for victory. His biggest weakness could come from his antisemitism, written about in such places as <i>The Dearborn Independent</i> and his book <i>The International Jew</i>. With any luck, Jewish voters will flock to your campaign.</p>'
+    },
+    gingrich: {
+      name: 'Newt Gingrich',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/glass.png',
+      isActive: true,
+      bioText: '<h5>Former Speaker of the House</h5><center><img src="https://itsastronomical.com/assets/1924/opp/glass.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>As an ally of William Gibbs McAdoo, Carter Glass is not a direct candidate for President. Nevertheless, he very well could become a compromise candidate if none of the frontrunners could make headways.</p><p>He most likely would be able to secure the nomination if corruption is removed as an issue, action on civil rights is taken, and progressives have a low enough influence in the Republican Party that the Democrats seek to win some of them over.</p><p>In the event of his nomination, he would struggle to make headways outside of the south. At most, he may be interested in deadlocking the election in order to deny you an electoral majority and giving you a headache.</p>'
+    },
+    paul: {
+      name: 'Ron Paul',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/silzer.png',
+      isActive: true,
+      bioText: '<h5>United States Representative from Texas</h5><center><img src="https://itsastronomical.com/assets/1924/opp/silzer.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>Governor Silzer’s victory in 1921 was seen as a mandate for prohibition reform in a state that has given both parties success. Additionally, Silzer has created for himself a reputation of being a strong proponent of reform and anti-corruption.</p><p>The faction led by Governor Smith would be happy to see him nominated as a compromise candidate. He most likely would be able to secure the nomination if corruption lingers as an issue, civil rights is only in the background, and progressives have a low enough influence in the Republican Party that the Democrats seek to win some of them over.</p><p>In the event of his nomination, he may be able to oust you in key states such as New Jersey and New York. Assuming corruption persists as an issue, perhaps pivoting away would be the best choice.</p>'
+    },
+    keyes: {
+      name: 'Alan Keyes',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/meredith.png',
+      isActive: true,
+      bioText: '<h5>Perennial Candidate</h5><center><img src="https://itsastronomical.com/assets/1924/opp/meredith.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>Edwin T. Meredith has been talked up as a compromise candidate in some circles, although Meredith himself has been eager to support McAdoo’s bid for the White House.</p><p>The faction led by Mr. McAdoo would be happy to see him nominated as a compromise candidate. He most likely would be able to secure the nomination if corruption lingers as an issue, civil rights is only in the background, and progressives still have a high influence in the Republican Party.</p><p>In the event of his nomination, it is likely that he could win much of the west and take away much of the progressive support. It is in the Midwest, however, with states like Illinois or Ohio, that his bid might falter.</p>'
+    },
+    powell: {
+      name: 'Colin Powell',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/davis.png',
+      isActive: false,
+      bioText: '<h5>Former Chairman of the Joint Chiefs</h5><center><img src="https://itsastronomical.com/assets/1924/opp/davis.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>The second bid by John Davis for his party’s nomination may seem like a long-shot, but make no mistake - Mr. Davis is seen as an real possibility for a compromise candidate if the convention cannot decide on a candidate.</p><p>With such large names like Smith and McAdoo in the running, it would likely take an unprecedented and inconclusive battle to hand Mr. Davis the nomination.</p><p>In the event of his nomination, it is hard to see him winning unless he can successfully press the issue of corruption.</p>'
+    },
+    lieberman: {
+      name: 'Joe Lieberman',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/gatsby.png',
+      isActive: gatsby,
+      bioText: '<h5>Former Vice President</h5><center><img src="https://itsastronomical.com/assets/1924/opp/jaygatsby.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>How could a man like Jay Gatsby receive the Democratic nomination, anyway?</p><p>With no political experience, a man only known for throwing lavish parties would have to have woo delegates over, one by one.</p><p>In the event of his nomination, it is hard to say what a campaign would look like. The best attack we can currently come up with is one against his lack of government experience.</p>'
+    },
+    norris: {
+      name: 'Chuck Norris',
+      imgURL: 'https://itsastronomical.com/assets/1924/opp/cox.png',
+      isActive: ralstonDies,
+      bioText: '<h5>Actor</h5><center><img src="https://itsastronomical.com/assets/1924/opp/cox.png" style="width: 75px; height: 75px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;"></center> <p>The tragic passing of Mr. Ralston has meant that your opponent will be James Cox, the runner up in 1920.</p><p>With so little time during the campaign, it is hard to see how or what you could attack him on. Perhaps it may be better to be Silent Cal.</p>'
+    },
+};
+
+// The number preceding the image links should be the PK of the accompanying question
+
+campaignTrail_temp.newsImages = campaignTrail_temp.newsImages || {
+    10000: "https://files.catbox.moe/a4jhh4.png",
+    20000: "https://files.catbox.moe/8cs7qc.png",
+
+};
+
+// Just like the images, the number preceding the captions should be the PK of the accompanying question
+
+campaignTrail_temp.newsCaptions = campaignTrail_temp.newsCaptions || {
+    10000: "<b>CNN: LIVE 2002
+Midterm Election Results<br>FOX: Gore Admin bracing for big GOP gains<br>NBC: Closest races to watch</b>",
+    20000: "<b>CNN: Senate stays in Democrat’s hands<br>FOX: GOP expands House majority<br>KWTX (CBS affiliate): 5 killed in “psychotic” violent attack</b>",
 };
 
 function createSimplePopup() {
@@ -7196,6 +7321,583 @@ async function handleFooter() {
     addHeadquarterButton();
 }
 
+// A giant mishmash of code from LBM, Bob’s Macarena, 1924 and MTE
+function openHeadquarter() {
+    
+    const questions = document.querySelector(".inner_window_question");
+    if (questions) questions.style.display = 'none';
+
+    const hqDiv = document.createElement('div');
+    hqDiv.id = 'headquarter';
+    hqDiv.style.cssText = `
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: #333;
+        background-image: url('https://file.garden/aNtAfG887DiA_7lO/2012LBM/vm4ADSR.jpeg');
+        border: 1px solid #222;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        display: flex; flex-direction: column;
+        max-height: 23.7em; overflow-y: hidden;
+        position: relative;
+    `;
+
+    const headerDiv = document.createElement('div');
+    headerDiv.style.cssText = `
+        background-image: linear-gradient(to bottom, #d8d8d8, #a7a7a7);
+        border-bottom: 1px solid #6d6d6d;
+        padding: 8px 12px;
+        border-radius: 12px 12px 0 0;
+        display: flex; justify-content: space-between; align-items: center;
+        box-shadow: inset 0 1px 0 #f0f0f0;
+        flex-shrink: 0;
+    `;
+    
+    const backButton = document.createElement('button');
+    backButton.innerText = 'Logout';
+    backButton.style.cssText = `
+        font-weight: bold; color: #555; text-shadow: 0 1px 0 white;
+        background-image: linear-gradient(to bottom, #f0f0f0, #c0c0c0);
+        border: 1px solid #888; border-radius: 6px; padding: 5px 12px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.2); cursor: pointer;
+    `;
+    backButton.onclick = function() {
+        if (hqDiv) hqDiv.remove();
+        if (questions) questions.style.display = '';
+    };
+    headerDiv.appendChild(backButton);
+    
+    const headerText = document.createElement('h2');
+    headerText.innerHTML = 'Logged in as POTUS';
+    headerText.style.cssText = 'flex-grow: 1; text-align: center; margin: 0; font-size: 1.1em; color: #444; text-shadow: 0 1px 0 #fff;';
+    headerDiv.appendChild(headerText);
+    
+    const spacer = document.createElement('div');
+    spacer.style.width = '57px';
+    headerDiv.appendChild(spacer);
+    hqDiv.appendChild(headerDiv);
+
+    const tabBar = document.createElement('div');
+    tabBar.style.cssText = `
+        display: flex; padding: 10px; flex-shrink: 0;
+        background-image: linear-gradient(to bottom, #a0a0a0, #888888);
+    `;
+    
+    const internalTabBtn = document.createElement('button');
+    internalTabBtn.innerText = 'Internal Communications';
+    const externalTabBtn = document.createElement('button');
+    externalTabBtn.innerText = 'External Information';
+    
+    const tabContentContainer = document.createElement('div');
+    tabContentContainer.style.cssText = `flex-grow: 1; overflow-y: auto;`;
+    
+    const internalTab = document.createElement('div');
+    internalTab.id = 'internalContent';
+    const externalTab = document.createElement('div');
+    externalTab.id = 'externalContent';
+    externalTab.style.display = 'none';
+    
+    tabContentContainer.appendChild(internalTab);
+    tabContentContainer.appendChild(externalTab);
+    hqDiv.appendChild(tabBar);
+    hqDiv.appendChild(tabContentContainer);
+
+    const styleTabButton = (btn, isActive) => {
+        btn.style.cssText = `
+            flex: 1; text-align: center; font-size: 0.9em; font-weight: bold;
+            padding: 6px 0; border: 1px solid #666;
+            cursor: pointer; transition: all 0.2s ease;
+        `;
+        if(isActive) {
+            btn.style.background = 'linear-gradient(to bottom, #4a90e2, #357ABD)';
+            btn.style.color = 'white';
+            btn.style.textShadow = '0 -1px 0 rgba(0,0,0,0.3)';
+            btn.style.boxShadow = 'inset 0 1px 3px rgba(0,0,0,0.4)';
+        } else {
+            btn.style.background = 'linear-gradient(to bottom, #d0d0d0, #b0b0b0)';
+            btn.style.color = '#444';
+            btn.style.textShadow = '0 1px 0 rgba(255,255,255,0.7)';
+        }
+    };
+
+    internalTabBtn.onclick = () => {
+        styleTabButton(internalTabBtn, true);
+        styleTabButton(externalTabBtn, false);
+        internalTab.style.display = 'block';
+        externalTab.style.display = 'none';
+    };
+    externalTabBtn.onclick = () => {
+        styleTabButton(internalTabBtn, false);
+        styleTabButton(externalTabBtn, true);
+        internalTab.style.display = 'none';
+        externalTab.style.display = 'block';
+        buildExternalTab(externalTab);
+    };
+
+    styleTabButton(internalTabBtn, true);
+    styleTabButton(externalTabBtn, false);
+    internalTabBtn.style.borderRadius = '6px 0 0 6px';
+    internalTabBtn.style.borderRight = 'none';
+    externalTabBtn.style.borderRadius = '0 6px 6px 0';
+    tabBar.appendChild(internalTabBtn);
+    tabBar.appendChild(externalTabBtn);
+    
+    if (questions) {
+        questions.parentNode.insertBefore(hqDiv, questions);
+    } else {
+        document.body.appendChild(hqDiv);
+    }
+}
+
+    // Create a container div for both columns
+    let columnsDiv = document.createElement('div');
+    columnsDiv.style.display = 'flex';
+    columnsDiv.style.width = '100%';
+
+    // Create inner divs for columns
+    let leftCol = document.createElement('div');
+    leftCol.style.width = '50%';
+    leftCol.style.display = 'flex'; // Make left column a flex container
+    leftCol.style.padding = '20px';
+    leftCol.classList.add('custom-p');
+    columnsDiv.appendChild(leftCol);
+
+    let rightCol = document.createElement('div');
+    rightCol.style.width = '50%';
+    rightCol.style.display = 'flex'; // Make right column a flex container
+    rightCol.style.padding = '20px';
+    rightCol.classList.add('custom-p');
+    columnsDiv.appendChild(rightCol);
+
+    internalTab.appendChild(columnsDiv);
+
+       const advisorTitle = document.createElement("div");
+        advisorTitle.innerHTML = "<b><strong>Email Notifications</strong></b>"; // You can change the campaign advisors headline to your liking here
+        advisorTitle.style.position = "absolute";
+        advisorTitle.style.left = "10px";
+        advisorTitle.style.top = "44px";
+        advisorTitle.style.fontSize = "13px";
+        advisorTitle.style.color = "#002b36";
+        advisorTitle.style.zIndex = "2";
+        leftCol.appendChild(advisorTitle);
+
+        const advisorsBox = document.createElement("div");
+		advisorsBox.id = "advisors_box";
+		advisorsBox.style.position = "absolute";
+		advisorsBox.style.left = "10px";
+		advisorsBox.style.top = (44 + 20) + "px";
+		advisorsBox.style.width = "245px";
+		advisorsBox.style.height = "377px";
+		advisorsBox.style.padding = "6px";
+		advisorsBox.style.boxSizing = "border-box";
+		advisorsBox.style.overflowY = "auto";   // ← scrollbar restored
+		advisorsBox.style.background = "rgba(255,255,255,0.0)";
+		leftCol.appendChild(advisorsBox);
+
+
+        advisors.forEach(ad => {
+            const row = document.createElement("div");
+            row.style.display = "flex";
+            row.style.flexDirection = "row";
+            row.style.gap = "8px";
+            row.style.marginBottom = "8px";
+            row.style.background = "rgba(255,255,255,0.94)";
+            row.style.border = "1px solid rgba(0,0,0,0.08)";
+            row.style.padding = "6px";
+
+            const imgWrap = document.createElement("div");
+            imgWrap.style.width = "70px";
+            imgWrap.style.height = "70px";
+            imgWrap.style.flex = "0 0 70px";
+
+            const img = document.createElement("img");
+            img.src = ad.picture;
+            img.style.imageRendering = "pixelated";
+            img.style.objectFit = "cover";
+            img.onload = () => {
+                const nw = img.naturalWidth;
+                const nh = img.naturalHeight;
+                if (nw < 70 || nh < 70) {
+                    img.style.width = nw + "px";
+                    img.style.height = nh + "px";
+                } else {
+                    img.style.width = "70px";
+                    img.style.height = "70px";
+                }
+            };
+
+            imgWrap.appendChild(img);
+
+            const text = document.createElement("div");
+            text.style.flex = "1";
+            text.style.minWidth = "0";
+            text.style.maxWidth = "500px";
+
+            const nm = document.createElement("div");
+            nm.innerHTML = ad.name;
+            nm.style.fontSize = "13px";
+            nm.style.marginBottom = "4px";
+
+            const adviceBox = document.createElement("div");
+            const found = adviceList.find(a => a.advisor_pk === ad.pk && String(a.question_pk) === String(questionPK));
+            adviceBox.innerHTML = found ? found.advice : "<i>uh oh some shit's broke lmfao</i>"; // [!] If this somehow appears while testing, some shit's wrong with what you're coding [!]
+            adviceBox.style.fontSize = "12px";
+            adviceBox.style.lineHeight = "1.15";
+            adviceBox.style.maxWidth = "500px";
+
+            text.appendChild(nm);
+            text.appendChild(adviceBox);
+
+            row.appendChild(imgWrap);
+            row.appendChild(text);
+            advisorsBox.appendChild(row);
+        });
+
+       const agendaTitle = document.createElement("div");
+        agendaTitle.innerHTML = "<b><strong>Ongoing and Past Actions</strong></b>";
+        agendaTitle.style.position = "absolute";
+        agendaTitle.style.left = "10px";
+        agendaTitle.style.top = "44px";
+        agendaTitle.style.fontSize = "13px";
+        agendaTitle.style.color = "#002b36";
+        agendaTitle.style.zIndex = "2";
+        rightCol.appendChild(agendaTitle);
+
+        overviewtxt = ""; // Initialize an empty string to hold the text
+
+        AGENDAGUI.forEach((num, index) => {
+            if (num === 1) { // if the object is 1 (so if its passed or been done)
+                if (index === 0) {
+                    overviewtxt += "Passed the Family Assistance Plan<br><br>";
+                }
+                if (index === 1) {
+                    overviewtxt += "Gutted Aid to Families with Dependent Children<br><br>";
+                }
+                if (index === 2) {
+                    overviewtxt += "Passed Universal Healthcare<br><br>";
+                }
+                if (index === 3) {
+                    overviewtxt += "Passed a comprehensive healthcare reform act<br><br>";
+                }
+                if (index === 4) {
+                    overviewtxt += "Greenlit Operation GEMSTONE<br><br>";
+                }
+                if (index === 5) {
+                    overviewtxt += "Covered up the Watergate business<br><br>";
+                }                
+                if (index === 6) {
+                    overviewtxt += "Endorsed the ratification of the Equal Rights<br>Amendment<br><br>";
+                }
+                if (index === 7) {
+                    overviewtxt += "Consolidated environmental agencies under<br>White House control<br><br>";
+                }
+                if (index === 8) {
+                    overviewtxt += "Quietly continued desegregation in the South<br><br>";
+                }
+                if (index === 9) {
+                    overviewtxt += "Took an Oval Office photo with Elvis<br><br>";
+                }
+                if (index === 10) {
+                    overviewtxt += "Appointed Shirley Hufstedler to<br>the Supreme Court<br><br>";
+                }
+                if (index === 11) {
+                    overviewtxt += "Utilized wage and price controls<br>to lower inflation<br><br>";
+                }
+                if (index === 12) {
+                    overviewtxt += "Ended the gold standard<br><br>";
+                }
+                if (index === 13) {
+                    overviewtxt += "Became the first American president to<br>visit the People's Republic of China<br><br>";
+                }
+                if (index === 14) {
+                    overviewtxt += "Watched Grease on Broadway with Zhou Enlai<br><br>";
+                }
+            }
+        });
+
+let ovsubtxt = document.createElement('h3');
+            ovsubtxt.id = 'ovsubtxtbox';
+            ovsubtxt.innerHTML = overviewtxt;
+            ovsubtxt.style.fontFamily = "Courier, monospace";
+            ovsubtxt.style.fontSize = "18px"; 
+            ovsubtxt.style.textAlign = 'center';
+            ovsubtxt.style.top = '00px';   
+            ovsubtxt.style.position = 'relative';
+            ovsubtxt.style.lineHeight = '1.1';
+            ovsubtxt.style.padding = '2px';       
+            ovsubtxt.style.textAlign = 'left';      
+            ovsubtxt.style.paddingLeft = '10px';
+            ovsubtxt.style.listStyleType = 'disc'; 
+            ovsubtxt.style.transform = "translate(14px, 20px)"; 
+            rightCol.appendChild(ovsubtxt);
+
+    let sidesDiv = document.createElement('div');
+    sidesDiv.style.display = 'flex';
+    sidesDiv.style.width = '100%';
+
+    // Create inner divs for columns
+    let leftSide = document.createElement('div');
+    leftSide.style.width = '50%';
+    leftSide.style.display = 'flex'; // Make left column a flex container
+    leftSide.style.padding = '20px';
+    leftSide.classList.add('custom-p');
+    sidesDiv.appendChild(leftSide);
+
+    let rightSide = document.createElement('div');
+    rightSide.style.width = '50%';
+    rightSide.style.display = 'flex'; // Make right column a flex container
+    rightSide.style.padding = '20px';
+    rightSide.classList.add('custom-p');
+    sidesDiv.appendChild(rightSide);
+
+    externalTab.appendChild(sidesDiv);
+
+let repPanel = document.createElement('div');
+repPanel.style.display = 'flex';
+repPanel.style.width = '95%';
+repPanel.style.height = '300px';
+repPanel.style.marginTop = '1em';
+leftSide.appendChild(repPanel);
+
+let nomineeGrid = document.createElement('div');
+nomineeGrid.style.display = 'grid';
+nomineeGrid.style.gridTemplateColumns = "repeat(auto-fill, minmax(70px, 1fr))";
+nomineeGrid.style.rowGap = "4px";   // Smaller vertical gap
+nomineeGrid.style.columnGap = "12px"; // Keep horizontal gap 
+nomineeGrid.style.width = '520px';
+nomineeGrid.style.height = '220px';
+nomineeGrid.style.border = '2px solid black';
+nomineeGrid.style.padding = '4px';
+nomineeGrid.style.backgroundColor = '#222';
+repPanel.appendChild(nomineeGrid);
+
+let bioViewer = document.createElement('div');
+bioViewer.style.width = '420px';
+bioViewer.style.marginLeft = '20px';
+bioViewer.style.backgroundColor = '#444';
+bioViewer.style.border = '2px solid black';
+bioViewer.style.padding = '12px';
+bioViewer.style.color = 'white';
+bioViewer.style.height = '250px'; 
+bioViewer.style.overflowY = 'auto';
+bioViewer.style.scrollbarWidth = 'thin';
+bioViewer.style.overflowX = 'hidden';    
+bioViewer.style.color = 'white';
+bioViewer.innerHTML = "<h3>Mr. President, we’ve compiled a list of possible Republican opponents in 2004. You may read about them by clicking their picture.</h3><center><img src='https://itsastronomical.com/assets/1924/opp/butler.png' style='width: 85px; height: 85px; display: block; margin: 0px; cursor: pointer; border: 3px solid white; border-radius: 1px; object-fit: cover;'></center><p>This list will be updated as we head closer to the election.</p>"; // You can change this as needed, obviously
+repPanel.appendChild(bioViewer);
+
+for (const [id, nominee] of Object.entries(nominees)) {
+    if (!nominee.isActive) continue;
+    let box = document.createElement('img');
+    box.src = nominee.imgURL;
+    box.style.width = '75px';
+    box.style.height = '75px';
+    box.style.display = 'block';
+    box.style.margin = '0';
+    box.style.cursor = 'pointer';
+    box.style.border = '3px solid white';
+    box.style.borderRadius = '2px';
+    box.title = nominee.name;
+    box.style.objectFit = 'cover';
+    box.onclick = () => {
+      bioViewer.innerHTML = `<h3>${nominee.name}</h3>${nominee.bioText}`;
+    };
+  
+    nomineeGrid.appendChild(box);
+}
+
+        const newsHeader = document.createElement("div");
+        newsHeader.innerHTML = "<b><strong>Top Headlines</strong></b>"; // You can change the news section headline to your liking here
+        newsHeader.style.position = "absolute";
+        newsHeader.style.left = "270px";
+        newsHeader.style.top = "44px";
+        newsHeader.style.fontSize = "13px";
+        newsHeader.style.color = "#002b36";
+        newsHeader.style.zIndex = "2";
+        rightSide.appendChild(newsHeader);
+
+        const newsImg = document.createElement("img");
+        newsImg.id = "advisor_news_image";
+        newsImg.style.position = "absolute";
+        newsImg.style.top = "66px";
+        newsImg.style.left = "270px";
+        newsImg.style.width = "135px";
+        newsImg.style.height = "152px";
+        newsImg.style.objectFit = "cover";
+        newsImg.style.border = "1px solid rgba(0,0,0,0.1)";
+        rightSide.appendChild(newsImg);
+
+        const cap = document.createElement("div");
+        cap.id = "advisor_news_caption";
+        cap.style.position = "absolute";
+        cap.style.left = "270px";
+        cap.style.top = "222px";
+        cap.style.width = "135px";
+        cap.style.textAlign = "center";
+        cap.style.fontSize = "12px";
+        rightSide.appendChild(cap);
+    }
+
+    updateWindowContent(questionPK);
+}
+
+    const opponentContainer = document.createElement('div');
+    opponentContainer.style.cssText = 'flex: 1; min-width: 320px; padding-left: 20px; border-left: 1px solid rgba(255,255,255,0.2); box-sizing: border-box; color: white; text-shadow: 0 1px 3px #000;';
+    
+    const opponentTitleText = opponentIsLocked ? "Republican Nominee" : "The Other Side";
+    opponentContainer.innerHTML = `<h3 style="border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; margin-top:0;">${opponentTitleText}</h3>`;
+    
+    // display top 2 opponents as cards
+    topOpponents.slice(0, 2).forEach((opponent, index) => {
+        const opponentCard = document.createElement('div');
+        opponentCard.style.cssText = `
+            background: rgba(0,0,0,0.3);
+            border: 2px solid ${index === 0 ? '#c62828' : '#ffa726'};
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        `;
+        
+        const badgeColor = index === 0 ? '#c62828' : '#ffa726';
+        const badgeText = index === 0 ? 'FRONTRUNNER' : 'CONTENDER';
+        
+        const badge = document.createElement('div');
+        badge.style.cssText = `
+            background: ${badgeColor};
+            color: white;
+            font-size: 0.7em;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        `;
+        badge.innerText = badgeText;
+        opponentCard.appendChild(badge);
+        
+        const profileRow = document.createElement('div');
+        profileRow.style.cssText = 'display: flex; align-items: flex-start; gap: 12px;';
+        
+        const img = document.createElement('img');
+        img.src = opponent.picture;
+        img.style.cssText = `
+            width: 70px;
+            height: 87px;
+            border: 2px ridge ${badgeColor};
+            border-radius: 6px;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        `;
+        
+        const textDiv = document.createElement('div');
+        textDiv.style.flex = '1';
+        textDiv.innerHTML = `
+            <h4 style="margin: 0 0 6px 0; font-size: 1.2em; font-weight: bold;">${opponent.name}</h4>
+            <p style="margin: 0; font-size: 0.85em; line-height: 1.4; opacity: 0.95;">${opponent.advice}</p>
+        `;
+        
+        profileRow.appendChild(img);
+        profileRow.appendChild(textDiv);
+        opponentCard.appendChild(profileRow);
+        opponentContainer.appendChild(opponentCard);
+    });
+
+    // show third contender as smaller mention if available
+    if (topOpponents[2]) {
+        const mentionDiv = document.createElement('div');
+        mentionDiv.style.cssText = `
+            background: rgba(255,255,255,0.1);
+            border-left: 3px solid #999;
+            padding: 8px 12px;
+            margin-top: 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            opacity: 0.8;
+        `;
+        mentionDiv.innerHTML = `<strong>${topOpponents[2].name}</strong> is also in the race but trailing significantly.`;
+        opponentContainer.appendChild(mentionDiv);
+    }
+
+    contentRow.appendChild(opponentContainer);
+    container.appendChild(contentRow);
+}
+
+function updateWindowContent(questionPK) {
+    const newsImgEl = document.getElementById("advisor_news_image");
+    const capEl = document.getElementById("advisor_news_caption");
+
+    let chosen = pictureDict2[questionPK] ||
+                 campaignTrail_temp.newsImages[questionPK] ||
+                 pictureDict2[0];
+
+    if (newsImgEl) newsImgEl.src = chosen;
+    if (capEl) capEl.innerHTML = campaignTrail_temp.newsCaptions[questionPK] || campaignTrail_temp.newsCaptions[0];
+
+    const advisorsBox = document.getElementById("advisors_box");
+    if (!advisorsBox) return;
+
+    let idx = 0;
+    advisors.forEach(ad => {
+        const row = advisorsBox.children[idx];
+        const text = row?.children[1];
+        const adviceBox = text?.children[1];
+        const found = adviceList.find(a => a.advisor_pk === ad.pk && String(a.question_pk) === String(questionPK));
+        if (adviceBox)
+            adviceBox.innerHTML = found ? found.advice : "<i>uh oh some shit's broke lmfao</i>"; // [!] If this somehow appears while testing, some shit's wrong with what you're coding [!]
+        idx++;
+    });
+}
+
+let lastQuestionPK = null;
+
+setInterval(() => {
+    const pop = document.getElementById("popOutMenu");
+    if (!pop) return;
+
+    let questionPK = null;
+
+    try {
+        const ans = document.querySelector('#question_form .game_answers');
+        if (ans?.value) {
+            const answerPK = ans.value;
+            const source = e?.answers_json || campaignTrail_temp.answers_json;
+            const found = source.find(a => String(a.pk) === String(answerPK));
+            if (found?.fields?.question) questionPK = found.fields.question;
+        }
+    } catch {}
+
+    if (questionPK === null) return;
+    if (String(questionPK) === String(lastQuestionPK)) return;
+
+    lastQuestionPK = questionPK;
+
+    updateWindowContent(questionPK);
+}, 200);
+
+// adds the HQ button to the UI
+function addServerButton() {
+    if (document.getElementById('server_button')) return;
+
+    const refButton = document.getElementById('headquarter_button');
+    if (!refButton) return;
+
+    const newButton = document.createElement('button');
+    newButton.id = 'server_button';
+    newButton.innerHTML = 'Secure Server';
+    newButton.style.marginLeft = '1.5em'; 
+    newButton.addEventListener('click', openHeadquarter);
+
+    const headquarterButton = document.getElementById('headquarter_button');
+    if (headquarterButton) {
+        headquarterButton.insertAdjacentElement('afterend', newButton);
+    } else {
+        refButton.insertAdjacentElement('afterend', newButton);
+    }
+  
+}
+
 let observerRunning = false;
 
 async function handleMutations(mutationsList, observer) {
@@ -7203,6 +7905,7 @@ async function handleMutations(mutationsList, observer) {
     observerRunning = true;
     observer.disconnect();
     addHeadquarterButton();
+    addServerButton();
     observer.observe(document.documentElement, { childList: true, subtree: true });
     observerRunning = false;
 }
