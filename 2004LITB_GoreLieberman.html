@@ -7366,7 +7366,7 @@ function openHeadquarter() {
     `;
     
     const backButton = document.createElement('button');
-    backButton.innerText = 'Logout';
+    backButton.innerText = 'Resume Game';
     backButton.style.cssText = `
         font-weight: bold; color: #555; text-shadow: 0 1px 0 white;
         background-image: linear-gradient(to bottom, #f0f0f0, #c0c0c0);
@@ -7380,7 +7380,7 @@ function openHeadquarter() {
     headerDiv.appendChild(backButton);
     
     const headerText = document.createElement('h2');
-    headerText.innerHTML = 'Logged in as POTUS';
+    headerText.innerHTML = 'Playing as Al Gore';
     headerText.style.cssText = 'flex-grow: 1; text-align: center; margin: 0; font-size: 1.1em; color: #444; text-shadow: 0 1px 0 #fff;';
     headerDiv.appendChild(headerText);
     
@@ -7395,22 +7395,34 @@ function openHeadquarter() {
         background-image: linear-gradient(to bottom, #a0a0a0, #888888);
     `;
     
-    const internalTabBtn = document.createElement('button');
-    internalTabBtn.innerText = 'Internal Communications';
-    const externalTabBtn = document.createElement('button');
-    externalTabBtn.innerText = 'External Information';
+    const adviceTabBtn = document.createElement('button');
+    adviceTabBtn.innerText = 'Advisors';
+    const agendaTabBtn = document.createElement('button');
+    agendaTabBtn.innerText = 'Accomplishments';
+    const opponentsTabBtn = document.createElement('button');
+    opponentsTabBtn.innerText = 'Opponent Index';
+    const newsTabBtn = document.createElement('button');
+    newsTabBtn.innerText = 'News';
     
     const tabContentContainer = document.createElement('div');
     tabContentContainer.style.cssText = `flex-grow: 1; overflow-y: auto;`;
     
-    const internalTab = document.createElement('div');
-    internalTab.id = 'internalContent';
-    const externalTab = document.createElement('div');
-    externalTab.id = 'externalContent';
-    externalTab.style.display = 'none';
+    const adviceTab = document.createElement('div');
+    adviceTab.id = 'adviceContent';
+    const agendaTab = document.createElement('div');
+    agendaTab.id = 'agendaContent';
+    agendaTab.style.display = 'none';
+    const opponentsTab = document.createElement('div');
+    opponentsTab.id = opponentsContent';
+    opponentsTab.style.display = 'none';
+    const newsTab = document.createElement('div');
+    newsTab.id = 'newsContent';
+    newsTab.style.display = 'none';
     
-    tabContentContainer.appendChild(internalTab);
-    tabContentContainer.appendChild(externalTab);
+    tabContentContainer.appendChild(adviceTab);
+    tabContentContainer.appendChild(agendaTab);
+    tabContentContainer.appendChild(opponentsTab);
+    tabContentContainer.appendChild(newsTab);
     hqDiv.appendChild(tabBar);
     hqDiv.appendChild(tabContentContainer);
 
@@ -7432,55 +7444,66 @@ function openHeadquarter() {
         }
     };
 
-    internalTabBtn.onclick = () => {
-        styleTabButton(internalTabBtn, true);
-        styleTabButton(externalTabBtn, false);
-        internalTab.style.display = 'block';
-        externalTab.style.display = 'none';
+    adviceTabBtn.onclick = () => {
+        styleTabButton(adviceTabBtn, true);
+        styleTabButton(agendaTabBtn, false);
+        styleTabButton(opponentsTabBtn, false);
+        styleTabButton(newsTabBtn, false);
+        adviceTab.style.display = 'block';
+        agendaTab.style.display = 'none';
+        opponentsTab.style.display = 'none';
+        newsTab.style.display = 'none';
     };
-    externalTabBtn.onclick = () => {
-        styleTabButton(internalTabBtn, false);
-        styleTabButton(externalTabBtn, true);
-        internalTab.style.display = 'none';
-        externalTab.style.display = 'block';
-        buildExternalTab(externalTab);
+    agendaTabBtn.onclick = () => {
+        styleTabButton(adviceTabBtn, false);
+        styleTabButton(agendaTabBtn, true);
+        styleTabButton(opponentsTabBtn, false);
+        styleTabButton(newsTabBtn, false);
+        adviceTab.style.display = 'none';
+        agendaTab.style.display = 'block';
+        opponentsTab.style.display = 'none';
+        newsTab.style.display = 'none';
+    };
+    opponentsTabBtn.onclick = () => {
+        styleTabButton(adviceTabBtn, false);
+        styleTabButton(agendaTabBtn, false);
+        styleTabButton(opponentsTabBtn, true);
+        styleTabButton(newsTabBtn, false);
+        adviceTab.style.display = 'none';
+        agendaTab.style.display = 'none';
+        opponentsTab.style.display = 'block';
+        newsTab.style.display = 'none';
+    };
+    newsTabBtn.onclick = () => {
+        styleTabButton(adviceTabBtn, false);
+        styleTabButton(agendaTabBtn, false);
+        styleTabButton(opponentsTabBtn, false);
+        styleTabButton(newsTabBtn, true);
+        adviceTab.style.display = 'none';
+        agendaTab.style.display = 'none';
+        opponentsTab.style.display = 'none';
+        newsTab.style.display = 'block';
     };
 
-    styleTabButton(internalTabBtn, true);
-    styleTabButton(externalTabBtn, false);
-    internalTabBtn.style.borderRadius = '6px 0 0 6px';
-    internalTabBtn.style.borderRight = 'none';
-    externalTabBtn.style.borderRadius = '0 6px 6px 0';
-    tabBar.appendChild(internalTabBtn);
-    tabBar.appendChild(externalTabBtn);
+    styleTabButton(adviceTabBtn, true);
+    styleTabButton(agendaTabBtn, false);
+    styleTabButton(opponentsTabBtn, false);
+    styleTabButton(newsTabBtn, false);
+    adviceTabBtn.style.borderRadius = '6px 0 0 6px';
+    adviceTabBtn.style.borderRight = 'none';
+    agendaTabBtn.style.borderRadius = '0 6px 6px 0';
+    opponentsTabBtn.style.borderRadius = '0 6px 6px 0';
+    newsTabBtn.style.borderRadius = '0 6px 6px 0';
+    tabBar.appendChild(adviceTabBtn);
+    tabBar.appendChild(agendaTabBtn);
+    tabBar.appendChild(opponentsTabBtn);
+    tabBar.appendChild(newsTabBtn);
     
     if (questions) {
         questions.parentNode.insertBefore(hqDiv, questions);
     } else {
         document.body.appendChild(hqDiv);
     }
-
-    // Create a container div for both columns
-    let columnsDiv = document.createElement('div');
-    columnsDiv.style.display = 'flex';
-    columnsDiv.style.width = '100%';
-
-    // Create inner divs for columns
-    let leftCol = document.createElement('div');
-    leftCol.style.width = '50%';
-    leftCol.style.display = 'relative';
-    leftCol.style.padding = '20px';
-    leftCol.classList.add('custom-p');
-    columnsDiv.appendChild(leftCol);
-
-    let rightCol = document.createElement('div');
-    rightCol.style.width = '50%';
-    rightCol.style.display = 'relative';
-    rightCol.style.padding = '20px';
-    rightCol.classList.add('custom-p');
-    columnsDiv.appendChild(rightCol);
-
-    internalTab.appendChild(columnsDiv);
 
        const advisorTitle = document.createElement("div");
         advisorTitle.innerHTML = "<b><strong>Email Notifications</strong></b>"; // You can change the campaign advisors headline to your liking here
@@ -7490,7 +7513,7 @@ function openHeadquarter() {
         advisorTitle.style.fontSize = "13px";
         advisorTitle.style.color = "#002b36";
         advisorTitle.style.zIndex = "2";
-        leftCol.appendChild(advisorTitle);
+        advisorTab.appendChild(advisorTitle);
 
         const advisorsBox = document.createElement("div");
 		advisorsBox.id = "advisors_box";
@@ -7503,7 +7526,7 @@ function openHeadquarter() {
 		advisorsBox.style.boxSizing = "border-box";
 		advisorsBox.style.overflowY = "auto";   // ← scrollbar restored
 		advisorsBox.style.background = "rgba(255,255,255,0.0)";
-		leftCol.appendChild(advisorsBox);
+		advisorTab.appendChild(advisorsBox);
 
 
         advisors.forEach(ad => {
@@ -7572,7 +7595,7 @@ function openHeadquarter() {
         agendaTitle.style.fontSize = "13px";
         agendaTitle.style.color = "#002b36";
         agendaTitle.style.zIndex = "2";
-        rightCol.appendChild(agendaTitle);
+        agendaTab.appendChild(agendaTitle);
 
         overviewtxt = ""; // Initialize an empty string to hold the text
 
@@ -7640,35 +7663,14 @@ let ovsubtxt = document.createElement('h3');
             ovsubtxt.style.paddingLeft = '10px';
             ovsubtxt.style.listStyleType = 'disc'; 
             ovsubtxt.style.transform = "translate(14px, 20px)"; 
-            rightCol.appendChild(ovsubtxt);
-
-    let sidesDiv = document.createElement('div');
-    sidesDiv.style.display = 'flex';
-    sidesDiv.style.width = '100%';
-
-    // Create inner divs for columns
-    let leftSide = document.createElement('div');
-    leftSide.style.width = '50%';
-    leftSide.style.display = 'relative';
-    leftSide.style.padding = '20px';
-    leftSide.classList.add('custom-p');
-    sidesDiv.appendChild(leftSide);
-
-    let rightSide = document.createElement('div');
-    rightSide.style.width = '50%';
-    rightSide.style.display = 'relative';
-    rightSide.style.padding = '20px';
-    rightSide.classList.add('custom-p');
-    sidesDiv.appendChild(rightSide);
-
-    externalTab.appendChild(sidesDiv);
+            agendaTab.appendChild(ovsubtxt);
 
 let repPanel = document.createElement('div');
 repPanel.style.display = 'flex';
 repPanel.style.width = '95%';
 repPanel.style.height = '300px';
 repPanel.style.marginTop = '1em';
-leftSide.appendChild(repPanel);
+opponentsTab.appendChild(repPanel);
 
 let nomineeGrid = document.createElement('div');
 nomineeGrid.style.display = 'grid';
@@ -7725,7 +7727,7 @@ for (const [id, nominee] of Object.entries(nominees)) {
         newsHeader.style.fontSize = "13px";
         newsHeader.style.color = "#002b36";
         newsHeader.style.zIndex = "2";
-        rightSide.appendChild(newsHeader);
+        newsTab.appendChild(newsHeader);
 
         const newsImg = document.createElement("img");
         newsImg.id = "advisor_news_image";
@@ -7736,7 +7738,7 @@ for (const [id, nominee] of Object.entries(nominees)) {
         newsImg.style.height = "152px";
         newsImg.style.objectFit = "cover";
         newsImg.style.border = "1px solid rgba(0,0,0,0.1)";
-        rightSide.appendChild(newsImg);
+        newsTab.appendChild(newsImg);
 
         const cap = document.createElement("div");
         cap.id = "advisor_news_caption";
@@ -7746,7 +7748,7 @@ for (const [id, nominee] of Object.entries(nominees)) {
         cap.style.width = "135px";
         cap.style.textAlign = "center";
         cap.style.fontSize = "12px";
-        rightSide.appendChild(cap);
+        newsTab.appendChild(cap);
 
     updateWindowContent(questionPK);
 }
@@ -7812,7 +7814,7 @@ function addServerButton() {
 
     const newButton = document.createElement('button');
     newButton.id = 'server_button';
-    newButton.innerHTML = 'Secure Server';
+    newButton.innerHTML = 'Game Menu';
     newButton.style.marginLeft = '1.5em'; 
     newButton.addEventListener('click', openHeadquarter);
 
