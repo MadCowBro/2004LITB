@@ -7413,7 +7413,7 @@ function openHeadquarter() {
     agendaTab.id = 'agendaContent';
     agendaTab.style.display = 'none';
     const opponentsTab = document.createElement('div');
-    opponentsTab.id = opponentsContent';
+    opponentsTab.id = 'opponentsContent';
     opponentsTab.style.display = 'none';
     const newsTab = document.createElement('div');
     newsTab.id = 'newsContent';
@@ -7491,8 +7491,8 @@ function openHeadquarter() {
     styleTabButton(newsTabBtn, false);
     adviceTabBtn.style.borderRadius = '6px 0 0 6px';
     adviceTabBtn.style.borderRight = 'none';
-    agendaTabBtn.style.borderRadius = '0 6px 6px 0';
-    opponentsTabBtn.style.borderRadius = '0 6px 6px 0';
+    agendaTabBtn.style.borderRadius = '0 0 0 0';
+    opponentsTabBtn.style.borderRadius = '0 0 0 0';
     newsTabBtn.style.borderRadius = '0 6px 6px 0';
     tabBar.appendChild(adviceTabBtn);
     tabBar.appendChild(agendaTabBtn);
@@ -7513,7 +7513,7 @@ function openHeadquarter() {
         advisorTitle.style.fontSize = "13px";
         advisorTitle.style.color = "#002b36";
         advisorTitle.style.zIndex = "2";
-        advisorTab.appendChild(advisorTitle);
+        adviceTab.appendChild(advisorTitle);
 
         const advisorsBox = document.createElement("div");
 		advisorsBox.id = "advisors_box";
@@ -7526,7 +7526,7 @@ function openHeadquarter() {
 		advisorsBox.style.boxSizing = "border-box";
 		advisorsBox.style.overflowY = "auto";   // ← scrollbar restored
 		advisorsBox.style.background = "rgba(255,255,255,0.0)";
-		advisorTab.appendChild(advisorsBox);
+		adviceTab.appendChild(advisorsBox);
 
 
         advisors.forEach(ad => {
